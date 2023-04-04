@@ -4,6 +4,10 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'accounts/{0}/{1}'.format(instance.slug, 'avatar')
+
 class User(models.Model):
     name = models.CharField(max_length=20, db_index=True, verbose_name="Имя")
     sur_name = models.CharField(max_length=20, verbose_name="Фамилия")
@@ -12,16 +16,17 @@ class User(models.Model):
     descriptions = models.TextField(max_length=300, verbose_name='Описание')
     email = models.EmailField(verbose_name='Почта')
     spec = models.ForeignKey('Specs', db_index=True, on_delete=models.PROTECT, verbose_name="Спецализация")
-    photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name="Фото")
+    photo = models.ImageField(upload_to=user_directory_path, verbose_name="Фото")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
-    vk_url = models.URLField(max_length=128, verbose_name='VK')
-    hh_url = models.URLField(max_length=128, verbose_name='HH')
-    behance_url = models.URLField(max_length=128, verbose_name='BH')
+    vk_url = models.URLField(max_length=128, blank=True, verbose_name='VK')
+    hh_url = models.URLField(max_length=128,blank=True, verbose_name='HH')
+    behance_url = models.URLField(max_length=128,blank=True,verbose_name='BH')
     phone_number_regex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
     phone_number = models.CharField(validators=[phone_number_regex], max_length=16, unique=True)
 
     def __str__(self):
         return self.name+self.sur_name
+
 
 
     def get_projects(self):
@@ -68,9 +73,12 @@ class Project(models.Model):
         ordering = ['id']
 
 
+def image_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'accounts/projects/{0}/{1}'.format(instance.proj.user.slug, filename)
 class Image(models.Model):
     proj = models.ForeignKey('Project', verbose_name='Фото проекта', on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='images')
+    photo = models.ImageField(upload_to=image_directory_path)
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
