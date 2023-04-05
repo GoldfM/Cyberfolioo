@@ -6,28 +6,29 @@ from django.contrib.auth.models import AbstractUser
 
 
 def user_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'accounts/{0}/{1}'.format(instance.slug, 'avatar')
 
 class User(AbstractUser):
-    name = models.CharField(max_length=20, db_index=True, verbose_name="Имя")
-    sur_name = models.CharField(max_length=20, verbose_name="Фамилия")
-    sur_sur_name = models.CharField(max_length=20, verbose_name="Отчество")
-    slug = models.SlugField(verbose_name='Слаг')
-    descriptions = models.TextField(max_length=300, verbose_name='Описание')
-    email = models.EmailField(verbose_name='Почта')
-    spec = models.ForeignKey('Specs', db_index=True, on_delete=models.PROTECT, verbose_name="Спецализация")
-    photo = models.ImageField(upload_to=user_directory_path, verbose_name="Фото")
+    name = models.CharField(max_length=20, db_index=True, verbose_name="Имя" ,blank=True)
+    sur_name = models.CharField(max_length=20, verbose_name="Фамилия",blank=True)
+    slug = models.SlugField(verbose_name='Слаг', unique=True)
+    descriptions = models.TextField(max_length=300, verbose_name='Описание',blank=True)
+    email = models.EmailField(verbose_name='Почта',blank=True)
+    spec = models.ForeignKey('Specs', db_index=True, on_delete=models.PROTECT, verbose_name="Спецализация",blank=True, null=True)
+    photo = models.ImageField(upload_to=user_directory_path, blank=True, verbose_name="Фото")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     vk_url = models.URLField(max_length=128, blank=True, verbose_name='VK')
     hh_url = models.URLField(max_length=128,blank=True, verbose_name='HH')
     behance_url = models.URLField(max_length=128,blank=True,verbose_name='BH')
     phone_number_regex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
-    phone_number = models.CharField(validators=[phone_number_regex], max_length=16, unique=True)
+    phone_number = models.CharField(validators=[phone_number_regex], max_length=16, unique=True,blank=True)
 
     def __str__(self):
         return self.name+self.sur_name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(User, self).save(*args, **kwargs)
 
 
     def get_projects(self):
