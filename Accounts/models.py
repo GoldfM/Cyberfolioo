@@ -2,13 +2,14 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import AbstractUser
 
 
 def user_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'accounts/{0}/{1}'.format(instance.slug, 'avatar')
 
-class User(models.Model):
+class User(AbstractUser):
     name = models.CharField(max_length=20, db_index=True, verbose_name="Имя")
     sur_name = models.CharField(max_length=20, verbose_name="Фамилия")
     sur_sur_name = models.CharField(max_length=20, verbose_name="Отчество")
