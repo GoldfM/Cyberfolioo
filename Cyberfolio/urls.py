@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from Accounts.views import addUser
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add-user', addUser, name='addUser'),
 ]
