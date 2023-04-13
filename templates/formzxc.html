@@ -1,0 +1,18 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Первая часть регистрации</title>
+</head>
+<body>
+<p>Здесь будет первая часть формы,</p>
+<form action="{% url 'form' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
