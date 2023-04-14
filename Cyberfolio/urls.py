@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from Accounts.views import addUser, wtfForm, wtfForm1
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('add-user', addUser, name='addUser'),
+    path('form', wtfForm, name='form'),
+    path(r'form1/<name>/<surname>/<sursurname>', wtfForm1, name='form1'),
 ]
+
