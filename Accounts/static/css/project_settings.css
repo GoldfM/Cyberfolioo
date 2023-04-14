@@ -1,0 +1,241 @@
+.settings_title{
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2.86vw;
+    line-height: 3.64vw;
+    color: #FF9000;
+    white-space:nowrap;
+}
+
+.main-info_edit{
+    margin: auto;
+    margin-top: 4.27vw;
+    width: 90.4vw;
+    padding: 3.33vw 3.85vw 1.66vw 3.64vw;
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+}
+
+.main-info_title{  
+    width: 100%;
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3.33vw;
+    line-height: 4.27vw;
+    color: #FF9000;
+    margin-bottom: 2.29vw;
+}
+
+.input-heading{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #FF9000;
+    margin-bottom: 0.625vw;
+}
+
+.main_input{
+    box-sizing: border-box;
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.45vw;
+    line-height: 1.56vw;
+    color: #828396;
+    width: 26.9vw;
+    height: 3.125vw;
+}
+
+.main_select{
+    padding-top: 0.52vw;
+    padding-bottom: 0.52vw;
+    background: url(/images/arrow.png) no-repeat right #ddd;
+    background-size: 26.9vw;
+    -webkit-appearance: none; /*ВАЖНАЯ СТРОЧКА - НЕ УБИРАТЬ*/
+}
+
+.main_input:not(:last-child){
+    margin-bottom: 1.56vw;
+}
+
+.main-info_edit_item:last-child{
+    width: 100%;
+    margin-left: 10vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-info_edit_form{
+    display: flex;
+}
+
+/*TEXTAREA*/
+
+.textarea-heading{
+    width: 100%;
+}
+
+.textarea{
+    width: 100%;
+    box-sizing: border-box;
+    height: 6.25vw;
+    background: #F3F0F8;
+    border: 0.15vw solid #090E2B;
+    border-radius: 1.04vw;
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.45vw;
+    line-height: 1.56vw;
+    color: #828396;
+    margin-bottom: 1.45vw;
+    padding: 1.35vw 1.25vw 1.35vw 1.25vw;
+}
+
+.textarea:last-child{
+    height: 15.3vw;
+    height:100%;
+}
+
+.check_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.check{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.45vw;
+    line-height: 1.56vw;
+    color: #FF9000;
+    margin-left: 0.46vw;
+}
+
+.check_img{
+    width: 2.08vw;
+}
+
+.center_container{
+    display: flex;
+    width: 90.4vw;
+    margin: auto;
+    margin-top: 3.125vw;
+    margin-bottom: 3.75vw;
+}
+
+.center_container_item{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-right: 2.7vw;
+}
+
+.addition{
+    display: flex;
+}
+
+.user_img{
+    width: 2.23vw;
+}
+
+/*PEOPLE*/
+
+.people{
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    padding: 3.33vw 2.5vw 2.5vw 3.64vw;
+}
+
+.people_text{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #000000;
+}
+
+.people_add{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #FF9000;
+    margin-left: 0.625vw;
+}
+
+/*LINK*/
+
+.link{
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    padding: 1.25vw 8.02vw 1.25vw 2.70vw;
+}
+
+/*PHOTOS*/
+
+.photos{
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    padding: 3.125vw 3.95vw 2.81vw 2.70vw;
+}
+
+.photos_title{
+    margin-bottom: 1.40vw;
+}
+
+.photos_add{
+    display: flex;
+    align-items: center;
+}
+
+.photos_add-text{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.25vw;
+    line-height: 1.35vw;
+    color: #000000;
+    margin-left: 1.40vw;
+}
+
+.photos_main-word{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #FF9000;
+}
+
+.photos_text{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #000000;
+    margin-bottom: 1.35vw;
+}
+
+.photos_img{
+    display: flex;
+    margin-top: 2.08vw;
+    justify-content: space-between;
+    margin-bottom: 1.45vw;
+}
+
+.photos_img_item{
+    width: 90%;
+}
+
+.photo_add_icon{
+    width: 1.92vw;
+}

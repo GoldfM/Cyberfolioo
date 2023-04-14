@@ -1,0 +1,166 @@
+body {
+    background: url(/images/Frame\ 12.png);
+}
+
+
+/* Main*/
+
+.main-container {
+    display: flex; 
+    /* margin-right: 69px;
+    margin-left: 61px;  */
+    justify-content: center;
+    margin-top: 66px;
+    margin-bottom: 20px; 
+    /* margin: 66px 69px 20px 61px; */
+    display: flex; 
+  }
+
+  .photo-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 705px;
+    max-height: 791px;
+    background-color: #F8F6F8;
+    padding: 63px 86px 23px 86px;
+    border-radius: 21px;
+  }
+  
+  .galochka-icon {
+    margin-right: 6px;
+  }
+  
+  .submit-section {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-left: auto;
+    
+  }
+
+  .input-wrapper {
+    margin-top: 55px;
+    display: flex;
+    align-items: center;
+  }
+
+  .add-photo-icon {
+    height: 30px;
+    width: 37.38px;
+    margin-right: 40px;
+  }
+
+  .redactor-container {
+    margin-left: 40px;
+    width: 55%;
+    max-height: 791px;
+    background-color: #F8F6F8;
+    padding: 47px 85px 19px 93px;
+    border-radius: 21px;
+  }
+
+  .redactor-heading {
+    font-family: 'Mont';
+    font-weight: 900;
+    font-size: 64px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    line-height: 82px;
+    color: #FF9000;
+  }
+  
+  .save-button{
+    background-color: #F8F6F8;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 30px;
+    color: #FF9000;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .input-photo-label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 26px;
+    cursor: pointer;
+  }
+
+  .input-heading {
+    font-weight: 700;
+    font-size: 28px;
+    color: #FF9000;
+    margin-bottom: 8px;
+    line-height: 30px;
+  }
+
+  .colum {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .colum:not(:last-child) {
+    margin-right: 70px;
+  }
+
+  .first-colum {
+    width: 41%;
+  }
+  
+  .second-colum {
+    width: 50%;
+    margin-left: auto;
+  }
+
+  .colum-fields {
+    display: flex;
+  }
+
+  .secon-input {
+    height: 55px;
+    width: 100%;
+  }
+
+  .first-input {
+    height: 55px;
+    width: 100%;
+  }
+
+  .textarea-heading {
+    display: block;
+  }
+
+  .textarea:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .textarea:focus {
+    box-shadow: none;
+    border-color: #FF9000;
+  }
+
+  .textarea {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 30px;
+    color: #828396;
+    background: #F3F0F8;
+    resize: none;
+    height: 183px;
+    width: 100%;
+    border: 3px solid #090E2B;
+    padding: 24px 19px;
+    border-radius: 20px;
+    transition: .3s box-shadow, .3s border-color;
+  }
+
+  
+  
+  .photo-submit-section {
+    margin-top: 43px;
+  }
+  
+  .info-submit-section {
+    margin-top: 18px;
+  }

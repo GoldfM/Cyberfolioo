@@ -1,0 +1,38 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25">
+    <title>Cyberfolio profile settings</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/enter-page_styles.css' %}">
+    <link href = "{% static 'css/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+</head>
+<body>
+    <a href="{% url 'home' %}" class="logo">
+        <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
+    </a>
+    <div class="enter-container">
+        <h1 class="enter-header">Вход в личный кабинет</h1>
+        <div class="form-container">
+            <form action="" autocomplete method="POST" class="enter-form"></form>
+            {% csrf_token %}
+
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for f in form %}
+            <p><label class="input enter-input" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+            <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+
+            <div class="enter-submit">
+                <a href="{% url 'welcome' %}" class="back-button">
+                    <img src="images/back-icon.png" alt="" class="back-icon">
+                </a>
+                <input type="submit" value="Войти" class="enter-submit-button usual-button">
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django import forms
 
 from Accounts.models import User
@@ -33,4 +33,8 @@ class RandomForm(forms.Form):
     name = forms.CharField (max_length=100)
     surName = forms.CharField(max_length=100)
     surSurName = forms.CharField(max_length=100)
+
+class LoginUserForm(AuthenticationForm):
+    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'form-input'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 

@@ -1,11 +1,12 @@
 import random
 
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse
-
-from Accounts.forms import CustomUserCreationForm, RandomForm
-from Accounts.models import User
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView
+from Accounts.forms import *
+from Accounts.models import *
 
 
 # Create your views here.
@@ -17,6 +18,7 @@ def addUser(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'tipo_registration.html', {'form': form})
+
 def wtfForm(request):
     # Первый этап регистрации, если он успешный, то...↓↓↓
     form = RandomForm()
@@ -50,3 +52,43 @@ def wtfForm1(request, name,surname, sursurname):
             a = User(first_name=name,last_name=surname,sur_sur_name=sursurname,email=mail,password=pass1)
             a.save()
     return HttpResponse('Хорош, зарегался, свободен, '+name+' '+surname)
+
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'enter-page.html'
+
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #c_def = self.get_user_context(title="Авторизация")
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('form')
+
+def welcome(request):
+    return render(request, 'welcome.html')
+
+class Home(ListView):
+    paginate_by = 6
+    model = Project
+    template_name = "main_page.html"
+    context_object_name = "projects"
+
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['projects'] = Project.objects.all()
+        #c_def = self.get_user_context(title = "Главная страница")
+        return context
+
+    def get_queryset(self):
+        return Project.objects.all()
+
+class Profile(ListView): #Ну тут вообще надо сделать будет DetailView, так пока чтобы работало
+    model = User
+    template_name = 'user_profile.html'
+    context_object_name = 'user'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['projects'] = Project.objects.all()
+        return context

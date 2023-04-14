@@ -1,0 +1,245 @@
+h1{
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3.33vw;
+    line-height: 4.27vw;
+    color: #FF9000;
+}
+
+h2{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.86vw;
+    line-height: 2.03vw;
+    color: #FF9000;
+}
+
+p{
+    margin: 0;
+}
+
+.hero{
+    margin: 0 auto;
+    margin-top: 5.20vw;
+    width: 91.1vw;
+    padding: 4.79vw;
+    padding-right: 8.22vw;
+    background-image: url(/images/hero_background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1.09vw;
+}
+
+.hero-description{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #F8F6F8;
+    margin-top: 0.41vw;
+    margin-bottom: 1.45vw;
+}
+
+.hero_info{
+    width: 36.9vw;
+}
+
+.hero_title{
+    margin-bottom: 3.64vw;
+}
+
+.hero-review_title{
+    margin-bottom: 0.625vw;
+}
+
+.hero_img{
+    align-self: center;
+}
+
+.hero-review_description{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #F8F6F8;
+}
+
+.last_star{
+    margin-right: 0.72vw; 
+}
+
+.hero-review_item-review{
+    display: inline-block;
+    transform: translateY(-0.2vw);
+}
+
+.main_container{
+    /*max-width: 1760px;*/
+    margin: auto;
+    margin-top: 4.06vw;
+    margin-bottom: 3.02vw;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 48.9vw;
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    padding: 3.17vw 3.64vw 2.08vw 3.64vw;
+}
+
+.about-project{
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    width: 40.6vw;
+    padding: 3.17vw 3.17vw 2.81vw 2.5vw;
+}
+
+.description_title{
+    margin-bottom: 1.97vw;
+}
+
+.description_text{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #000000;
+    margin-bottom: 1.71vw;
+}
+
+.link_container_left-part{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.87vw;
+    line-height: 2.03vw;
+    color: #FF9000;
+    margin-right: 1.61vw;
+}
+
+.link_container_right-part{
+    display: flex;
+}
+
+.description_link{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.link_container{
+    display: flex;
+    align-items: center;
+}
+
+.about-project_category_header{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.875vw;
+    line-height: 2.03vw;
+    color: #FF9000;
+    width: 16.6vw;
+    margin-right: 1.56vw;
+}
+
+.about-project_category_description{
+    font-family: 'Gordita';
+    font-style: normal;
+    text-align: left;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #000000;
+    width: 18.8vw;
+}
+
+.about-project_category{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3.125vw;
+}
+
+.about-project_edit{
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.45vw;
+    line-height: 1.56vw;
+    color: #FF9000;
+}
+
+.about-project_title{
+    margin-bottom: 1.61vw;
+}
+
+.about-project_img{
+    margin-right: 0.78vw;
+    width: 2.03vw;
+}
+
+.review{
+    display: flex;
+    margin: auto;
+    width: 91.6vw;
+    padding: 2.91vw;
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    justify-content: space-between;
+    margin-bottom: 3.02vw;
+}
+
+.review_item{
+    min-width: 50%;
+}
+
+.review_item:last-child{
+    display: flex;
+    justify-content: right;
+}
+
+.review_stars{
+    width: 3.07vw;
+    margin-bottom: 1.35vw;
+}
+
+.review_text{
+    width: 80%;
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.66vw;
+    line-height: 1.82vw;
+    color: #000000;
+    margin-top: 1.30vw;
+}
+
+.review-title{
+    margin-bottom: 1.45vw;
+}
+
+.star_img{
+    width: 2.65vw;
+}
+
+.hero_pic{
+    width: 27.7vw;
+}

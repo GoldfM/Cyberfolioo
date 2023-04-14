@@ -1,7 +1,38 @@
-
-
-
+{% load static%}
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25">
+    <title>Cyberfolio profile settings</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registration_styles.css' %}">
+    <link href = "{% static 'css/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+</head>
+<body>
+    <h1 class="registretion-headear">Давайте создадим аккаунт!</h1>
+            <form action="{% url 'form' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            {% for f in form %}
+            <p><label class="input enter-input" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+            <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+
+            <div class="enter-submit">
+                <a href="welcome.html" class="back-button">
+                    <img src="images/back-icon.png" alt="" class="back-icon">
+                </a>
+                <input type="submit" value="Войти" class="enter-submit-button usual-button">
+            </div>
+            </form>
+</body>
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,4 +46,4 @@
     <input type="submit" value="Submit">
 </form>
 </body>
-</html>
+</html> -->

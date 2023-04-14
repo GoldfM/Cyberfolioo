@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25">
+    <title>Cyberfolio profile settings</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user-profile_styles.css' %}">
+    <link href = "{% static 'css/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+    
+</head>
+<body>
+    
+<header class="header">
+    <div class="container header-container">
+        <a href="{% url 'home' %}" class="logo">
+            <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
+        </a>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"></a>Главная</li>
+                <li class="nav-item"><a href="" class="nav-link"></a>Мои подписки</li>
+            </ul>
+        </nav>
+        <div class="user-container">
+            <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
+            <a href="{% url 'profile' %}" class ="profile-link">Мой профиль</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container user-info-container">
+        <div class="left-user-section">
+            <h1 class="user-header">Фамилия Имя</h1>
+            <p class="user-info">Здесь какой-то очень длинный общирный текст о себе, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит подробно, информативно и лаконично одновременно</p>
+            <div class="user-statistic-container">
+                <h3 class="user-statistic-header">Статистика</h3>
+                <ul class="statistic-list">
+                    <li class="statistic-item"><div>0</div>проекта</li>
+                    <li class="statistic-item"><div>0</div>подписок</li>
+                    <li class="statistic-item"><div>0</div>подписчика</li>
+                </ul>
+                <button class="usual-button submit-button">Подписаться</button>
+            </div>
+        </div>
+        <div class="right-user-section">
+            <div class="personal-user-info">
+                <h4 class="personal-header">Имя</h4>
+                <p>Имя</p>
+                <p>Фамилия отчество</p>
+                <h4 class="personal-header">Специализация</h4>
+                <ul class="user-contacts">
+                    <li class="contact-item">
+                        <a href="" class="contact">
+                            <img src="/images/vk-icon.svg" alt="" class="contact-img">
+                        </a>
+                    </li>
+                    <li class="contact-item">
+                        <a href="" class="contact">
+                            <img src="/images/hh.svg" alt="" class="contact-img">
+                        </a>
+                    </li>
+                    <li class="contact-item">
+                        <a href="" class="contact">
+                            <img src="/images/phone.svg" alt="" class="contact-img">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="user-avatar">
+                <img src="/images/user-image.png" alt="">
+                <a href="" class="redactor-link">
+                    <img src="/images/redactor-icon.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+    <h1 class="projects-header">Проекты</h1>
+    <div class="project-card">
+        <div class="project-avatar-aria">
+            <img class="project-avatar" src="/images/project-avatar.png" alt="">
+        </div>
+        <div class="project-info-aria">
+            <h3 class="project-name">Название проекта</h3>
+            <p class="project-info">Здесь какой-то очень длинный общирный текст о проекте, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит подробно, информативно и лаконично одновременно
+                Здесь какой-то очень длинный общирный текст о проекте, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит</p>
+            <div class="about-project-section">
+                <a class="project-link">
+                    <h5 class="abour-project">Подробнее</h5>
+                    <img class="abour-project-icon" src="images/about-project-icon.svg"> 
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-container container">
+        <div class="footer-left">
+            <a href="" class="footer-logo">
+                <img src="images/Logo.png" alt="" class="footer-logo-img">
+            </a>
+        </div>
+        <div class="footer-right">
+            <nav class="nav">
+                <ul class="footer-nav-list">
+                    <li class="footer-nav-item"><a href="" class="footer-nav-link"></a>Главная</li>
+                    <li class="footer-nav-item"><a href="" class="footer-nav-link"></a>Мои проекты</li>
+                    <li class="footer-nav-item"><a href="" class="footer-nav-link"></a>Личный кабинет</li>
+                </ul>
+            </nav>
+            <div class="about-us">
+                <h2 class="about-us-heading">О нас</h2>
+                <ul class="about-us-list">
+                    <li class="about-us-item">Команда ОАО ”УЕЛКИ”</li>
+                    <li class="about-us-item">Бекэнд-разработчик Катерина</li>
+                    <li class="about-us-item">Фронтенд-разработчик Тимофей</li>
+                    <li class="about-us-item">Дизайнер Анастасия</li>
+                    <li class="about-us-item">Бекэнд-разработчик Михаил</li>
+                    <li class="about-us-item">Тимлид Дмитрий</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

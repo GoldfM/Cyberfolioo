@@ -1,0 +1,79 @@
+.search_container{
+    display: flex;
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    width: 90.4%;
+    margin: auto;
+    margin-top: 4.32vw;
+    margin-bottom: 2.08vw;
+    flex-direction: column;
+    padding: 2.55vw 4.16vw 1.45vw 3.75vw;
+}
+
+.search_header{
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3.125vw;
+    line-height: 4.01vw;
+    color: #FF9000;
+    margin-bottom: 3.02vw;
+}
+
+.input-heading{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.875vw;
+    line-height: 2.03vw;
+    color: #FF9000;
+    margin-bottom: 0.57vw;
+}
+
+.search_form{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10.5vw;
+}
+
+.search_info{
+    display: flex;
+}
+
+.search_img{
+    width: 45.4vw;
+}
+
+.search_button{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.5vw;
+    line-height: 2.7vw;
+    color: #F8F6F8;
+    border: none;
+    padding: 0.93vw 3.02vw;
+    margin-top: 5.98vw;
+    width: 14.1vw;
+}
+
+.search_input{
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.45vw;
+    line-height: 1.56vw;
+    color: #828396;
+    padding: 0.78vw 2.91vw 0.52vw 1.19vw;
+    width: 26.9vw;
+    border: 0.15vw solid #090E2B;
+    border-radius: 4.01vw;
+}
+
+.search_input:not(:last-child){
+    margin-bottom: 1.71vw;
+}
+
+.search_button-container{
+    display: flex;
+}

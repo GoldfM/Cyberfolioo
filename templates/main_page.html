@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+    <link href = "{% static 'css/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"></a>Главная</li>
+                    <li class="nav-item"><a href="" class="nav-link"></a>Мои подписки</li>
+                </ul>
+            </nav>
+            <div class="user-container">
+                <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
+                <a href="{% url 'profile' %}" class ="profile-link">Мой профиль</a>
+            </div>
+            <!-- {% if request.user.is_authenticated %} -->
+
+			<!-- {% else %}
+				<li class="user-container"><a href="{% url 'form' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
+			{% endif %}-->
+
+        </div>
+    </header>
+
+    <main>
+        <div class="search_container">
+            <div class="search_header">
+                Давайте вдохновимся
+            </div>
+            <div class="search_info">
+                <div class="search_form">
+                    <div class="input-heading">Имя</div>
+                    <input required type="text" name="first-name" placeholder="Иван" class="input search_input">
+                    <div class="input-heading">Фамилия</div>
+                    <input required type="text" name="last-name" placeholder="Иванов" class="input search_input">
+                    <div class="input-heading">Специализация</div>
+                    <input required type="text" name="specialization" placeholder="Указать род деятельности" class="input search_input">
+                    <div class="search_button-container">
+                        <input type="submit" value="Поиск" class="usual-button search_button">
+                    </div>
+                </div>
+                <div>
+                    <img class="search_img" src="{% static 'images/mainpage_img.png' %}">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer_logo">
+            <img class="footer_logo-img" src="{% static 'images/Logo.png' %}">
+        </div>
+        <div class="footer_nav">
+            <a class="nav_link" href="{% url 'home' %}">Главная</a>
+            <a class="nav_link">Мои проекты</a>
+            <a class="nav_link">Личный кабинет</a>
+        </div>
+        <div class="about-us_container">
+            <div class="nav_link about-us_heading">О нас</div>
+            <div class="about-us_contacts">
+                <div class="about-us_contacts-left">
+                    <a class="about-us_contacts-text" href="/">Команда ОАО ”УЕЛКИ”</a>
+                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Катерина </a>
+                    <a class="about-us_contacts-text" href="/">Фронтенд-разработчик Тимофей </a>
+                </div>
+                <div class="about-us_contacts-right">
+                    <a class="about-us_contacts-text" href="/">Дизайнер Анастасия</a>
+                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Михаил </a>
+                    <a class="about-us_contacts-text" href="/">Тимлид  Дмитрий</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

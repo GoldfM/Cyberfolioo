@@ -1,0 +1,66 @@
+
+.welcome-container {
+
+}
+
+.logo {
+    
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+ }
+ 
+
+body {
+    height: 100%;
+    background-image: url(images/welcome-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center;
+}
+
+img{
+    margin: 0;
+    padding: 0;
+}
+
+.logo-img{
+    position: relative;
+    right: auto;
+    /* height: 7.3148vh;*/
+    width: 18.906vw;
+    margin-top: 4.3vw;
+    margin-right: auto;
+    margin-left: 5.2vw;
+}
+
+.registration-container {
+    margin-left: 5.2vw;
+    width: 45%;
+    padding: 0px;
+    margin-top: 9vw;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-button:not(:last-child) {
+    margin-bottom: 2.29vw;
+}
+
+.welcome-headear {
+    display: flex;
+    flex-wrap: nowrap;
+    color: #090E2B;
+    font-weight: 900;
+    font-size: 3.33vw;
+    line-height: 4.26vw;
+    margin-bottom: 3.54vw;
+}

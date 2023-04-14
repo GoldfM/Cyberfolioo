@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Accounts.views import addUser, wtfForm, wtfForm1
+from Accounts.views import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', LoginUser.as_view(), name='login'),
+    path('home/', Home.as_view(), name='home'),
+    path('profile/', Profile.as_view(), name='profile'),
+    #path('project_set/', Project_set.as_view(), name='project_set'),
+    path('welcome/', welcome, name='welcome'),
     path('add-user', addUser, name='addUser'),
     path('form', wtfForm, name='form'),
     path(r'form1/<name>/<surname>/<sursurname>', wtfForm1, name='form1'),

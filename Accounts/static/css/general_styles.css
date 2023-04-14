@@ -1,0 +1,215 @@
+body {
+  background-image: url(/images/background.png);
+  background-size: cover;
+}
+
+.usual-button {
+  background-color: #feb250;
+  padding: 1.14vw 2.70vw;
+  border-radius: 1.66vw;
+  color: #f8f6f8 !important;
+  font-weight: 400;
+  font-size: 2.5vw;
+  line-height: 2.7vw;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+input {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+html {
+  font-family: "Gordita";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0;
+}
+
+.input_file {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  height: 5.83vw;
+  border-radius: 0px 0px 3.125vw 3.125vw;
+  background-color: #f8f6f8;
+  font-size: 2.08vw;
+  line-height: 2.23vw;
+  color: #000000;
+  line-height: 1.56vw;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.logo {
+  width: 16.7vw;
+  margin-left: 3.95vw;
+  margin-right: 6.77vw;
+}
+
+.nav-list {
+  display: flex;
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
+.nav-item:not(:last-child) {
+  margin-right: 6.4vw;
+}
+
+.user-container {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 7.23vw;
+}
+
+.user-icon {
+  width: 2.18vw;
+  margin-right: 0.78vw;
+}
+
+/* Main*/
+
+.input::placeholder {
+  color: #828396;
+}
+
+.input {
+  border: 0.15vw solid #090E2B;
+  border-radius: 4.01vw;
+  padding: 0.78vw 1.198vw;
+  margin-bottom: 13px;
+  transition: 0.3s box-shadow, 0.3s border-color;
+  background: #f3f0f8;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.8vw;
+  line-height: 1.354vw;
+}
+
+.input:hover {
+  box-shadow: 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25), 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25);
+}
+
+.input:focus {
+  box-shadow: none;
+  border-color: #ff9000;
+}
+
+/* Footer */
+.footer {
+  background: #f8f6f8;
+  border-radius: 3.12vw 3.12vw 0px 0px;
+  padding: 1.97vw 7.55vw 1.4vw 4.16vw;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10.9vw;
+}
+
+.footer_logo {
+  margin-right: 6.3vw;
+}
+
+.footer_logo-img {
+  width: 16.7vw;
+}
+
+.footer_nav {
+  display: flex;
+  flex-direction: column;
+  margin-right: 7.13vw;
+}
+
+.nav_link {
+  font-family: "Gordita";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.66vw;
+  line-height: 1.82vw;
+  color: #ff9000;
+  white-space: nowrap;
+}
+
+.nav_link:not(:last-child) {
+  margin-bottom: 1.09vw;
+}
+
+.about-us_contacts {
+  display: flex;
+}
+
+.about-us_contacts-text {
+  font-family: "Gordita";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.25vw;
+  line-height: 1.35vw;
+  color: #000000;
+  white-space: nowrap;
+  margin-bottom: 0.46vw;
+}
+
+.about-us_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-us_contacts-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-us_contacts-left {
+  display: flex;
+  flex-direction: column;
+  margin-right: 6.97vw;
+}
