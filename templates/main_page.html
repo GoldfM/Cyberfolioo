@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+    <link href = "{% static 'css/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+{% endblock %}
+
+{% block content %}
+<div class="search_container">
+            <div class="search_header">
+                Давайте вдохновимся
+            </div>
+            <div class="search_info">
+                <div class="search_form">
+                    <div class="input-heading">Имя</div>
+                    <input required type="text" name="first-name" placeholder="Иван" class="input search_input">
+                    <div class="input-heading">Фамилия</div>
+                    <input required type="text" name="last-name" placeholder="Иванов" class="input search_input">
+                    <div class="input-heading">Специализация</div>
+                    <input required type="text" name="specialization" placeholder="Указать род деятельности" class="input search_input">
+                    <div class="search_button-container">
+                        <input type="submit" value="Поиск" class="usual-button search_button">
+                    </div>
+                </div>
+                <div>
+                    <img class="search_img" src="{% static 'images/mainpage_img.png' %}">
+                </div>
+            </div>
+        </div>
+{% endblock %}

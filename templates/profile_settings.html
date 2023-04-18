@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.25">
+    <title>Cyberfolio profile settings</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile_styles.css' %}">
+    <link href = "{% static 'css/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+    
+</head>
+<body>
+    
+<header class="header">
+    <div class="container header-container">
+        <a href="{% url 'home' %}" class="logo">
+            <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
+        </a>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"></a>Главная</li>
+                <li class="nav-item"><a href="" class="nav-link"></a>Мои подписки</li>
+            </ul>
+        </nav>
+        <div class="user-container">
+            <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
+            <a href="" class ="profile-link">Мой профиль</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="main-section">
+        <div class="container main-container">
+            <div class="photo-container">
+                <img src="/images/user-image.png" alt="">
+                <form action="" autocomplete method="POST" class="add-image-form">
+                    <div class="input-wrapper">
+                        <img src="/images/photo-icon.svg" alt="" class="add-photo-icon">
+                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg" id="input_file" class="input_file">
+                        <label for="input_file" class="input-photo-label">Добавить фото</label>
+                    </div>
+                    <div class="submit-section photo-submit-section">
+                        <img src="/images/galochka.svg" alt="" class="galochka-icon">
+                        <input type="submit" value="Сохранить" class="save-button">
+                    </div>
+                </form>
+            </div>
+            <div class="redactor-container">
+                <h1 class="redactor-heading">Редактировать данные</h1>
+                <form action="" autocomplete method="POST" class="information-form">
+                    <div class="colum-fields">
+                        <div class="colum first-colum">
+                        <div class="input-heading">Фамилия</div>
+                        <input required type="text" name="last-name" placeholder="Иванов" class="input first-input">
+                        <div class="input-heading">Имя</div>
+                        <input required type="text" name="first-name" placeholder="Иван" class="input first-input">
+                        <div class="input-heading">Отчество (при наличии)</div>
+                        <input required type="text" name="surename" placeholder="Иванович" class="input first-input">
+                        </div>
+                        <div class="colum second-colum">
+                        <div class="input-heading">Специализация</div>
+                        <input required type="text" name="specialization" placeholder="Дизайн" class="input secon-input">
+                        <div class="input-heading">Контакты</div>
+                        <input required type="text" name="vk-link" placeholder="Ссылка на вк" class="input secon-input">
+                        <input required type="text" name="hhru" placeholder="Ссылка на резюме на hh.ru" class="input secon-input">
+                        <input required type="tel" name="tel" placeholder="Телефон" class="input secon-input">
+                        </div>
+                    </div>
+                    <strong class="input-heading textarea-heading">О себе</strong>
+                    <textarea name="personal-info" placeholder="Расскажите кратко о себе, своих навыках, опыте работы"  class="textarea"></textarea>
+                    <div class="submit-section info-submit-section">
+                        <img src="/images/galochka.svg" alt="" class="galochka-icon">
+                        <input type="submit" value="Сохранить изменения" class="save-button">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+    <footer class="footer">
+        <div class="footer-container container">
+            <div class="footer-left">
+				<a href="" class="footer-logo">
+					<img src="images/Logo.png" alt="" class="footer-logo-img">
+				</a>
+			</div>
+            <div class="footer-right">
+                <nav class="nav">
+                    <ul class="footer-nav-list">
+                        <li class="footer-nav-item"><a href="" class="footer-nav-link"></a>Главная</li>
+                        <li class="footer-nav-item"><a href="" class="footer-nav-link"></a>Мои проекты</li>
+                        <li class="footer-nav-item"><a href="" class="footer-nav-link"></a>Личный кабинет</li>
+                    </ul>
+                </nav>
+                <div class="about-us">
+                    <h2 class="about-us-heading">О нас</h2>
+                    <ul class="about-us-list">
+                        <li class="about-us-item">Команда ОАО ”УЕЛКИ”</li>
+                        <li class="about-us-item">Бекэнд-разработчик Катерина</li>
+                        <li class="about-us-item">Фронтенд-разработчик Тимофей</li>
+                        <li class="about-us-item">Дизайнер Анастасия</li>
+                        <li class="about-us-item">Бекэнд-разработчик Михаил</li>
+                        <li class="about-us-item">Тимлид Дмитрий</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/project_settings.css' %}">
+    <link href = "{% static 'css/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"></a>Главная</li>
+                    <li class="nav-item"><a href="" class="nav-link"></a>Мои подписки</li>
+                </ul>
+            </nav>
+            <div class="user-container">
+                <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
+                <a href="{% url 'profile' %}" class ="profile-link">Мой профиль</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-info_edit">
+            <h1 class="main-info_title">Редактировать данные <br> о проекте</h1>
+            <div>
+                <form action="" autocomplete method="POST" class="main-info_edit_form">
+                    <div class="main-info_edit_item">
+                        <div class="input-heading">Название проекта</div>
+                        <input required type="text" name="last-name" placeholder="Название проекта" class="input main_input">
+                        <div class="input-heading">Срок разработки</div>
+                        <input required type="text" name="last-name" placeholder="Указать промежуток времени" class="input main_input">
+                        <div class="input-heading">Тип проекта</div>
+                        <select name="list" class="input main_input main_select">
+                            <option value="" disabled selected>Выбор из вариантов</option>
+                            <option value="oneperson">Индивидуальный</option>
+                            <option value="team">Командный</option>
+                        </select>
+                        <div class="input-heading">Специализация</div>
+                        <input required type="text" name="last-name" placeholder="Указать род деятельности" class="input main_input">
+                    </div>
+                    <div class="main-info_edit_item">
+                        <div class="input-heading textarea-heading">Ключевые мысли</div>
+                        <textarea name="personal-info" placeholder="Расскажите о проекте кратко"  class="textarea"></textarea>
+                        <div class="input-heading textarea-heading">Описание</div>
+                        <textarea name="personal-info" placeholder="Ну а теперь можно поподробнее с чувством, толком. с расстановкой"  class="textarea"></textarea>
+                    </div>
+                </form> 
+            </div>
+            <div class="check_container">
+                <img class="check_img" src="/images/check.png">
+                <span class="check">Сохранить изменения</span>
+            </div>
+        </div>
+
+        <div class="center_container">
+            <div class="center_container_item">
+                <div class="people">
+                    <h2 class="settings_title">Участники</h2>
+                    <p class='people_text'>Здесь вы можете указать людей, которые вам помогали в разработке проекта, либо были как-либо затронуты
+                        (ссылкой на их профиль, либо просто ФИО)</p>
+                    <input required type="text" name="last-name" placeholder="Ссылка на профиль" class="input main_input">
+                    <input style="display: inline;" required type="text" name="last-name" placeholder="Ссылка на профиль" class="input main_input">
+                    <input style="display: none;" required type="text" name="last-name" placeholder="Ссылка на профиль" class="input main_input">
+                    <input style="display: none;" required type="text" name="last-name" placeholder="Ссылка на профиль" class="input main_input">
+                    <input style="display: none;" required type="text" name="last-name" placeholder="Ссылка на профиль" class="input main_input">
+                    <div>
+                        <img class="user_img" src="/images/user.png">
+                        <span class="people_add">+Добавить участника</span>
+                    </div>
+                    
+                </div>
+                <div class="link">
+                    <h2 class="settings_title">Ссылка на проект</h2>
+                    <input required type="text" name="last-name" placeholder="Ссылка на архив с проектом" class="input main_input">
+                </div>
+            </div>
+            
+            <div class="photos">
+                <h2 class="settings_title photos_title">Фотографии</h2>
+                <div class="photos_text">Чтобы другие пользователи могли лучше понять, как работает ваш проект, как он выглядит - рекомендуем добавить фотографии</div>
+                <div class="photos_text"><span class="photos_main-word">Аватарка проекта</span> - то, что пользователь увидит сначала, когда откроет проект. Это должно быть что-то заметное, цепляющее </div>
+                <div class="photos_text"><span class="photos_main-word">Основное фото</span> - будет использоваться как задний фон на аватарке и главное фото, в панеле отзывов. Поэтому оно должно быть информативным </div>
+                <div class="photos_img">
+                    <div>
+                        <img class="photos_img_item" src="/images/project_settings_1.png">
+                    </div>
+                    <br>
+                    <div>
+                        <img class="photos_img_item" src="/images/project_settings_2.png">
+                    </div>
+                    
+                </div>
+                <div class="addition">
+                    <div class="photos_add">
+                        <img class="photo_add_icon" src="/images/photo.png">
+                        <span class="photos_add-text">Добавить аватарку проекта</span>
+                    </div>
+                    <div class="photos_add">
+                        <img class="photo_add_icon" src="/images/photo.png">
+                        <span class="photos_add-text">Добавить основное фото</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="footer">
+        <div class="footer_logo">
+            <img class="footer_logo-img" src="/images/Logo.png">
+        </div>
+        <div class="footer_nav">
+            <a class="nav_link">Главная</a>
+            <a class="nav_link">Мои проекты</a>
+            <a class="nav_link">Личный кабинет</a>
+        </div>
+        <div class="about-us_container">
+            <div class="nav_link about-us_heading">О нас</div>
+            <div class="about-us_contacts">
+                <div class="about-us_contacts-left">
+                    <a class="about-us_contacts-text" href="/">Команда ОАО ”УЕЛКИ”</a>
+                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Катерина </a>
+                    <a class="about-us_contacts-text" href="/">Фронтенд-разработчик Тимофей </a>
+                </div>
+                <div class="about-us_contacts-right">
+                    <a class="about-us_contacts-text" href="/">Дизайнер Анастасия</a>
+                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Михаил </a>
+                    <a class="about-us_contacts-text" href="/">Тимлид  Дмитрий</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+body {
+    height: 100%;
+    background-image: url(images/welcome-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+ }
+
+ .logo {
+    
+    margin: 0;
+    padding: 0;
+}
+.logo-img{
+    position: relative;
+    right: auto;
+    /* height: 7.3148vh;*/
+    width: 18.906vw;
+    margin-top: 5.9vh;
+    margin-right: auto;
+    margin-left: 5.2vw;
+}
+.enter-container {
+    margin-left: 5.2vw;
+    width: 45%;
+    padding: 0px;
+    margin-top: 9vh;
+    
+    display: flex;
+    flex-direction: left;
+    align-items: center;
+}
+
+.welcome-button:not(:last-child) {
+    margin-bottom: 2.29vw;
+}
+
+.form-container {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.enter-input {
+    width: 32.44vw;
+    height: 4.895vw;
+}
+
+.welcome-headear {
+    display: flex;
+    flex-wrap: nowrap;
+    color: #090E2B;
+    font-weight: 900;
+    font-size: 5.926vh;
+    line-height: 7.59vh;
+    margin-bottom: 6.3vh;
+}
