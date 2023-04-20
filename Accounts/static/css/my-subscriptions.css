@@ -1,0 +1,20 @@
+.my-subscriptions-container{
+    display: flex;
+    background: #F8F6F8;
+    border-radius: 1.09vw;
+    width: 90.4%;
+    margin: auto;
+    margin-top: 4.32vw;
+    margin-bottom: 2.08vw;
+    flex-direction: column;
+    padding: 1.1vw 2.65vw;
+}
+
+.my-subscriptions-header {
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3.333vw;
+    line-height: 4.27vw;
+    color: #FF9000;
+}

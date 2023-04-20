@@ -1,0 +1,250 @@
+html {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.user-info-container {
+    display: flex;
+    /* width: 96.25vw; */
+    height: 32.9167vw;
+    background-color: #F8F6F8;
+    padding-bottom: 2.5vw;
+    padding-top: 2.396vw;
+    position: relative;
+    /* margin-right: auto;
+    margin-left: auto; */
+    margin-top: 4.375vw;
+    border-radius: 1.094;
+}
+
+.container {
+    width: 96.25vw;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.left-user-section {
+    display: flex;
+    flex-direction: column;
+    width: 41.823vw;
+    padding-left: 3.28125vw;
+    padding-right: 1.97vw;
+    justify-content: space-between;
+}
+
+
+.user-header {
+    padding-top: 1.61458vw;
+    font-weight: 900;
+    font-size: 3.33333vw;
+    color: #FF9000;
+    line-height: 4.27083vw;
+}
+
+
+
+.user-statistic-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+button {
+    text-decoration: none;
+    padding: 0px;
+    border: 0px;
+}
+
+.second-colum {
+    display: flex;
+    align-items: end;
+    margin-left: auto;
+}
+
+.user-statistic {
+    display: flex;
+    flex-direction:row;
+    width: 100%;
+    justify-content:space-around;
+    margin-top: 0px;
+}
+
+.first-colum {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0px;
+    padding: 0px;
+    
+}
+
+
+.user-statistic-header {
+    display: inline;
+    font-weight: 700;
+    font-size: 1.66667vw;
+    line-height: 1.8229vw;
+    color: #FF9000;
+    margin-bottom: 0.78125vw;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.statistic-item:not(:last-child) {
+    margin-bottom: 0.41vw;
+}
+
+.statistic-item {
+    font-weight: 400;
+    font-size: 1.66667vw;
+    line-height: 1.8229vw;
+    flex-wrap: nowrap;
+    display: flex;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.right-user-section {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    background-color: #F0EDF8;
+    padding-top: 2.917vw;
+    padding-left: 3.854vw;
+    padding-right: 1.979vw;
+    margin-right: 1.5625vw;
+    border-radius: 1.09375vw;
+}
+
+.avatar {
+    width: 20.88vw;
+    max-width: 20.88vw;
+    min-width: 20.88vw;
+    margin-right: 3.125vw;
+}
+
+.personal-item {
+    font-weight: 400;
+    font-size: 1.875vw;
+    line-height: 2.03125vw;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.personal-header {
+    font-weight: 700;
+    font-size: 1.4583vw;
+    line-height: 1.5625vw;
+    margin-bottom: 0px;
+    color: #FF9000;
+}
+
+.contact-img {
+    max-width: 3.177vw;
+    min-width: 3.177vw;
+}
+
+.contact-item:not(:last-child) {
+    margin-right: 1.5104vw;
+}
+
+.user-contacts {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5.364vw;
+}
+
+.redactor-icon {
+    max-width: 2.03125vw;
+    min-width: 2.03125vw;
+}
+
+.user-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-left: 8.646vw;
+}
+
+.second-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.8229vw;
+    margin-bottom: 1.77vw;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.projects-header {
+    font-family: 'Mont';
+    font-weight: 900;
+    font-size: 3.3333vw;
+    line-height: 4.27vw;
+    color: #FF9000;
+}
+
+.add-project-aria {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1.041vw 1.51vw 1.041vw 2.24vw;
+    background-color: #F8F6F8;
+    border-radius: 1.1vw;
+}
+
+.add-project {
+    font-weight: 400;
+    font-size: 2.5vw;
+    line-height: 2.708vw;
+    color: #FF9000;
+}
+
+.add-project-icon {
+    width: 3.802vw;
+    margin-right: 0.8333vw;
+}
+
+.third-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #F8F6F8;
+    padding: 2.552vw 2.8125vw 2.6vw 2.8125vw;
+    margin-bottom: 2.448vw;
+    border-radius: 1.1vw;
+}
+
+.project-avatar {
+    min-width: 22.9vw;
+    max-width: 22.9vw;
+}
+
+.project-info-aria {
+    display: flex;
+    flex-direction: column;
+    margin-left: 4.427vw;
+}
+
+.project-name {
+    font-weight: 700;
+    font-size: 2.08vw;
+    line-height: 2.2396vw;
+    color: #FF9000;
+    margin-bottom: 1.25vw;
+}
+
+.project-info {
+    margin-top: 0px !important;
+}
+
+.project-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    margin-top: auto;
+}
+

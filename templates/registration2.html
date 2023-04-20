@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,31 +8,30 @@
     <title>Cyberfolio profile settings</title>
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/enter-page_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registration_styles.css' %}">
     <link href = "{% static 'fonts/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
 </head>
 <body>
-    <a href="{% url 'home' %}" class="logo">
-        <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
-    </a>
-    <div class="enter-container">
-        <h1 class="enter-headear">Вход в личный кабинет</h1>
+    <div class="registrarion-container">
+        <h1 class="registration-headear">Давайте создадим аккаунт!</h1>
         <div class="form-container">
-            <form action="" autocomplete method="POST" class="enter-form">
-            {% csrf_token %}
-            <div class="form-error">{{ form.non_field_errors }}</div>
-            {% for f in form %}
-            {{ f }}
-            <div class="form-error">{{ f.errors }}</div>
-            {% endfor %}
+            <form action="{%  url 'form1' name=Name    surname=SurName     sursurname=SurSurName %}" autocomplete method="POST" class="registation-form">
+                {% csrf_token %}
+                {{ error }}
 
+                {% for f in form %}
+                    {{f}}
+{#                    {{ f.errors }}#}
+
+                {% endfor %}
             <div class="enter-submit">
-                <a href="{% url 'welcome' %}" class="back-button">
+                <a href="" class="back-button">
                     <img src="{%  static 'images/back-icon.png' %}" alt="" class="back-icon">
                 </a>
                 <input type="submit" value="Войти" class="enter-submit-button usual-button">
             </div>
-            </form>
+                </form>
         </div>
     </div>
 </body>
+

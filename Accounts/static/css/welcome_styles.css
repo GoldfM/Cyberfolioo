@@ -19,7 +19,7 @@ html, body {
 
 body {
     height: 100%;
-    background-image: url(images/welcome-background.png);
+    background-image: url(../images/welcome-background.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right center;
@@ -35,7 +35,7 @@ img{
     right: auto;
     /* height: 7.3148vh;*/
     width: 18.906vw;
-    margin-top: 4.3vw;
+    margin-top: 3vw;
     margin-right: auto;
     margin-left: 5.2vw;
 }

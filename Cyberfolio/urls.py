@@ -21,11 +21,10 @@ from Accounts.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', LoginUser.as_view(), name='login'),
-    path('home/', Home.as_view(), name='home'),
-    path('profile/', Profile.as_view(), name='profile'),
+    path('', Home.as_view(), name='home'),
+    path('profile/<slug:slug>', Profile.as_view(), name='profile'),
     #path('project_set/', Project_set.as_view(), name='project_set'),
     path('welcome/', welcome, name='welcome'),
-    path('add-user', addUser, name='addUser'),
     path('form', wtfForm, name='form'),
     path(r'form1/<name>/<surname>/<sursurname>', wtfForm1, name='form1'),
 ]

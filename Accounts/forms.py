@@ -21,6 +21,13 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['password2'].help_text = None
         self.fields['password1'].help_text = None
         self.fields['email'].help_text = None
+        list = ['Введите почту', 'Введите пароль', 'Повторите пароль']
+        i=0
+        for visible in self.visible_fields():
+            print(visible)
+            visible.field.widget.attrs['class'] = 'input enter-input'
+            visible.field.widget.attrs['placeholder'] = list[i]
+            i+=1
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -29,12 +36,12 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('username', 'email')
 
 
-class RandomForm(forms.Form):
-    name = forms.CharField (max_length=100)
-    surName = forms.CharField(max_length=100)
-    surSurName = forms.CharField(max_length=100)
+class firstForm(forms.Form):
+    name = forms.CharField (max_length=100, widget=forms.TextInput(attrs={'class': 'input enter-input','placeholder':'Имя'}))
+    surName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'input enter-input','placeholder':'Фамилия'}))
+    surSurName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'input enter-input','placeholder':'Отчество (при наличии)'}))
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'input enter-input'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'input enter-input'}))
 

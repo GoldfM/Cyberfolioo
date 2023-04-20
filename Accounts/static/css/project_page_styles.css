@@ -26,7 +26,7 @@ p{
     width: 91.1vw;
     padding: 4.79vw;
     padding-right: 8.22vw;
-    background-image: url(/images/hero_background.png);
+    background-image: url(../images/hero_background.png);
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -170,6 +170,10 @@ p{
     width: 18.8vw;
 }
 
+.about-project_category_description_user{
+    margin-bottom: 0.625vw;
+}
+
 .about-project_category{
     display: flex;
     justify-content: space-between;
@@ -236,10 +240,27 @@ p{
     margin-bottom: 1.45vw;
 }
 
+.review_textarea{
+    width: 41.4vw;
+    height: 6.77vw;
+}
+
 .star_img{
     width: 2.65vw;
 }
 
 .hero_pic{
     width: 27.7vw;
+}
+
+.review_submit{
+    border: none; 
+    outline: none;
+    background: none;
+    font-family: 'Gordita';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.87vw;
+    line-height: 2.03vw;
+    color: #FF9000;
 }

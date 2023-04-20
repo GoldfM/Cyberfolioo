@@ -79,23 +79,6 @@
     width: 100%;
 }
 
-.textarea{
-    width: 100%;
-    box-sizing: border-box;
-    height: 6.25vw;
-    background: #F3F0F8;
-    border: 0.15vw solid #090E2B;
-    border-radius: 1.04vw;
-    font-family: 'Gordita';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.45vw;
-    line-height: 1.56vw;
-    color: #828396;
-    margin-bottom: 1.45vw;
-    padding: 1.35vw 1.25vw 1.35vw 1.25vw;
-}
-
 .textarea:last-child{
     height: 15.3vw;
     height:100%;
@@ -159,6 +142,7 @@
     font-size: 1.66vw;
     line-height: 1.82vw;
     color: #000000;
+    margin-bottom: 1.77vw;
 }
 
 .people_add{

@@ -77,3 +77,68 @@
 .search_button-container{
     display: flex;
 }
+
+.user-card-container {
+    width: 90.4%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5vw;
+    height: 30.677vw;
+}
+
+.left-section {
+    padding: 3.75vw 2.7vw 3.1vw 3.49vw;
+    width: 56.51vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-section {
+    padding: 2.396vw 2.55vw 1.927vw 2.55vw;
+}
+
+.statistic-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.avatar {
+    min-width: 26.1vw;
+    max-width: 26.1vw;
+}
+
+.project-link {
+    align-self: end;
+    align-items: end !important;
+}
+
+.about-project {
+    margin: 0px;
+}
+
+.user-text {
+    margin-bottom: auto;
+}
+
+.about-project{
+    margin: 0px;
+}
+
+h5 {
+    margin: 0px;
+}
+
+.user-header {
+    font-weight: 700;
+    font-size: 3.333vw;
+    line-height: 3.6vw;
+    color: #FF9000;
+    margin-bottom: 2vw;
+}
+
+.another-user-card {
+    flex-direction: row-reverse;
+}
