@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import AbstractUser
 
-
+from django.contrib.auth import get_user_model
 def user_directory_path(instance, filename):
     return 'accounts/{0}/{1}'.format(instance.slug, 'avatar')
 
@@ -33,8 +33,9 @@ class User(AbstractUser):
                     'ю': 'yu',
                     'я': 'ya'}
 
-        self.slug = slugify(''.join(alphabet.get(w, w) for w in (self.first_name+self.last_name).lower()))
-        self.username=self.slug
+        self.slug = slugify(''.join(alphabet.get(w, w) for w in self.username.lower()))
+        #self.password=self.set_password(self.password)
+        #self.slug = slugify(''.join(alphabet.get(w, w) for w in (self.first_name+self.last_name).lower()))
         super(User, self).save(*args, **kwargs)
 
 

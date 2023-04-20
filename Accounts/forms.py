@@ -1,16 +1,17 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 from django import forms
 
-from Accounts.models import User
+#from Accounts.models import User
 from Cyberfolio.settings import AUTH_PASSWORD_VALIDATORS
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2')
         help_texts = {
-            'email': None,
+            'username': None,
             'password1': None,
             'password2': None,
         }
@@ -20,8 +21,8 @@ class CustomUserCreationForm(UserCreationForm):
         # for fieldname in ['password2',]:
         self.fields['password2'].help_text = None
         self.fields['password1'].help_text = None
-        self.fields['email'].help_text = None
-        list = ['Введите почту', 'Введите пароль', 'Повторите пароль']
+        self.fields['username'].help_text = None
+        list = ['Введите логин', 'Введите пароль', 'Повторите пароль']
         i=0
         for visible in self.visible_fields():
             print(visible)
@@ -33,7 +34,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('username', )
 
 
 class firstForm(forms.Form):

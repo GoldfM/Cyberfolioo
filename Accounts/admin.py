@@ -11,7 +11,7 @@ class CustomUserAdmin(UserAdmin):
         (
             'Мои поля',
             {'fields':
-                 ('phone_number',
+                 (
                   'descriptions',
                   'photo',
                   'vk_url',
@@ -27,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
         (
             'Поля',
             {'fields':
-                 ('phone_number',
+                 (
                   'descriptions',
                   'photo',
                   'vk_url',

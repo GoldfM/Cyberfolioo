@@ -1,5 +1,6 @@
 import random
 
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse
 from django.shortcuts import render, redirect
@@ -31,15 +32,17 @@ def wtfForm(request):
 
 def wtfForm1(request, name,surname, sursurname):
     if request.method == 'POST':
-        mail = request.POST['email']
+        username = request.POST['username']
         pass1 = request.POST['password1']
         pass2 = request.POST['password2']
         form = CustomUserCreationForm(request.POST)
-        if User.objects.filter(email=mail).exists():
+        if User.objects.filter(username=username).exists():
+
             return render(request, 'registration2.html',
-                          {'form': form, 'Name': name, 'SurName': surname, 'SurSurName': sursurname, 'error': 'Пользователь с таким email уже существует'})
+                          {'form': form, 'Name': name, 'SurName': surname, 'SurSurName': sursurname, 'error': 'Пользователь с таким username уже существует'})
         if form.is_valid():
-            a = User(first_name=name,last_name=surname,sur_sur_name=sursurname,email=mail,password=pass1)
+            a = User(first_name=name,last_name=surname,sur_sur_name=sursurname,username=username)
+            a.set_password(pass1)
             a.save()
             return redirect('/')
         else:
@@ -50,6 +53,8 @@ def wtfForm1(request, name,surname, sursurname):
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'enter-page.html'
+
+
 
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
