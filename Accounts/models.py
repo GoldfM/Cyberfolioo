@@ -13,7 +13,7 @@ class User(AbstractUser):
     slug = models.SlugField(verbose_name='Слаг', unique=True)
     descriptions = models.TextField(max_length=300, verbose_name='Описание',blank=True)
     email = models.EmailField(verbose_name='Почта',blank=True)
-    spec = models.ForeignKey('Specs', db_index=True, on_delete=models.PROTECT, verbose_name="Спецализация",blank=True, null=True)
+    spec = models.ForeignKey('Specs', db_index=True, on_delete=models.PROTECT, verbose_name="Спецализация",blank=True, default=1)
     photo = models.ImageField(upload_to=user_directory_path, blank=True, verbose_name="Фото")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     vk_url = models.URLField(max_length=128, blank=True, verbose_name='VK')

@@ -3,7 +3,7 @@ import random
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect, QueryDict, HttpResponse
+from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView
@@ -84,25 +84,37 @@ class Home(ListView):
     def get_queryset(self):
         return Project.objects.all()
 
+
+class PostDoesNotExist:
+    pass
+
+
 class Profile(DetailView): #Ну тут вообще надо сделать будет DetailView, так пока чтобы работало
     model = User
     template_name = 'user_profile.html'
     context_object_name = 'user'
 
+    def get_object(self, queryset=None):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        try:
+            return queryset.get(slug=slug)
+        except PostDoesNotExist:
+            raise Http404('Ох, нет объекта;)')
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        user_profile = User.objects.get(slug=slug)
+        if request.user.is_authenticated:
+            if user_profile.id == request.user.id:
+                # Пользователь открывает свой профиль
+                return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': True})
+
+          # Пользователь открывает профиль другого пользователя
+        return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': False})
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['projects'] = Project.objects.all()
         return context
 
-@login_required
-def profile(request, slug):
-    user_profile = get_object_or_404(User, slug=slug)
-    if user_profile.user.id == request.user.id:
-        # Пользователь открывает свой профиль
-        # Добавьте здесь ваш код для обработки этого случая
-        return render(request, 'user_profile.html', {'user_profile': user_profile})
-    else:
-        # Пользователь открывает профиль другого пользователя
-        # Добавьте здесь ваш код для обработки этого случая
-        return render(request, 'myapp/other_profile.html', {'user_profile': user_profile})
+class EditProfile(DetailView):
+    model = User
