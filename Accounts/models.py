@@ -39,12 +39,22 @@ class User(AbstractUser):
         super(User, self).save(*args, **kwargs)
 
 
+
+
     def get_projects(self):
         return Project.objects.all().filter(user_id=self.id)
+    def count_projects(self):
+        return len(self.get_projects())
 
     def get_followers(self):
         return Follow.objects.all().filter(follow_to_id=self.id)
+    def count_followers(self):
+        return len(self.get_followers())
 
+    def get_followings(self):
+        return Follow.objects.all().filter(follow_from_id=self.id)
+    def count_followings(self):
+        return len(self.get_followings())
     def get_absolute_url(self):
         return reverse('user', kwargs={'user': self.slug})
 
@@ -69,7 +79,7 @@ class Project(models.Model):
         return Image.objects.all().filter(proj_id=self.id)
 
     def __str__(self):
-        return self.name+self.name
+        return self.name
 
     def get_absolute_url(self):
         return reverse('project', kwargs={'user': self.user.slug,'post_slug': self.name})

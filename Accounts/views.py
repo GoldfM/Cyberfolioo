@@ -1,9 +1,10 @@
 import random
 
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView
 from Accounts.forms import *
@@ -83,12 +84,25 @@ class Home(ListView):
     def get_queryset(self):
         return Project.objects.all()
 
-class Profile(ListView): #Ну тут вообще надо сделать будет DetailView, так пока чтобы работало
+class Profile(DetailView): #Ну тут вообще надо сделать будет DetailView, так пока чтобы работало
     model = User
     template_name = 'user_profile.html'
     context_object_name = 'user'
+
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['projects'] = Project.objects.all()
         return context
+
+@login_required
+def profile(request, slug):
+    user_profile = get_object_or_404(User, slug=slug)
+    if user_profile.user.id == request.user.id:
+        # Пользователь открывает свой профиль
+        # Добавьте здесь ваш код для обработки этого случая
+        return render(request, 'user_profile.html', {'user_profile': user_profile})
+    else:
+        # Пользователь открывает профиль другого пользователя
+        # Добавьте здесь ваш код для обработки этого случая
+        return render(request, 'myapp/other_profile.html', {'user_profile': user_profile})
