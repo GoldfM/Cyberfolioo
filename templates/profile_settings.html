@@ -51,6 +51,7 @@
                 {% endif %}
                     <div class="input-wrapper">
                         <img src="{% static '/images/photo-icon.svg' %}" alt="" class="add-photo-icon">
+                        {{ form.photo}}
                         {% render_field form.photo value="Добавить фото" hidden=True accept="image/*,image/jpeg" id="input_file" class="input_file" %}
                 <label for="input_file" class="input-photo-label">Добавить фото</label>
 

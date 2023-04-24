@@ -122,16 +122,35 @@ class ProfileUpdateView(UpdateView):
     model = User
     enctype="multipart/form-data"
     fields = ['first_name', 'last_name', 'sur_sur_name', 'spec', 'vk_url', 'hh_url', 'behance_url', 'descriptions', 'photo']
-    template_name = 'profile_settings.html'
+    template_name = 'profile_settings1.html'
     def get(self, request, *args, **kwargs):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
-        user_profile = get_object_or_404(User,slug=slug)
+        user_profile = get_object_or_404(User, slug=slug)
         #user_profile = User.objects.get(slug=slug)
         if request.user.is_authenticated:
             if user_profile.id == request.user.id:
                 self.object = self.get_object()
                 return super().get(request, *args, **kwargs)
         raise PermissionDenied()
+    def post(self, request, *args, **kwargs):
+        user_profile = get_object_or_404(User, slug=self.kwargs.get(self.slug_url_kwarg, None))
+        print(user_profile.first_name)
+
+        if 'first_name' not in request.POST:
+            request.POST = {**request.POST,
+                            'first_name': user_profile.first_name,
+                            'last_name': user_profile.last_name,
+                            'spec': user_profile.spec,
+                            'sur_sur_name': user_profile.sur_sur_name,
+                            'vk_url': user_profile.vk_url,
+                            'hh_url': user_profile.hh_url,
+                            'descriptions': user_profile.descriptions,
+                            'behance_url': user_profile.behance_url}
+
+
+        return  super().post(request, args, kwargs)
+
+
 
 
 
