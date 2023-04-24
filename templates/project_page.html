@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project</title>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="general_styles.css">
-    <link rel="stylesheet" href="project_page_styles.css">
-    <link href = "fonts/stylesheet.css" rel = "stylesheet" type = "text/css" />
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/project_page_styles.css' %}">
+    <link href = "{% static 'fonts/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
 </head>
 <body>
 
     <header class="header">
         <div class="container header-container">
             <a href="" class="logo">
-                <img src="/images/Logo.png" alt="" class="logo-img">
+                <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
             </a>
             <nav class="nav">
                 <ul class="nav-list">
@@ -24,7 +25,7 @@
                 </ul>
             </nav>
             <div class="user-container">
-                <img src="/images/user-icon.png" alt="" class = "user-icon">
+                <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
                 <a href="" class ="profile-link">Мой профиль</a>
             </div>
         </div>
@@ -42,7 +43,7 @@
                     <div class="hero-review_item">
                         <div class="hero_review_stars hero-review_description">
                             <span class="hero-review_item-review">
-
+                                
                                 3.5 (пользователями)
                             </span>  
                         </div>
@@ -58,7 +59,7 @@
                 </div>
             </div>
             <div class="hero_img">
-                <img class="hero_pic" src="/images/hero_img.png">
+                <img class="hero_pic" src="{% static 'images/hero_img.png' %}">
             </div>
         </div>
 
@@ -108,7 +109,7 @@
                 </div>
                 <div class="about-project_edit">
                     <div>
-                        <img class="about-project_img" src="/images/pen.png">
+                        <img class="about-project_img" src="{% static 'images/pen.png' %}">
                     </div>
                     <div>Редактировать</div>
                 </div>
@@ -119,24 +120,21 @@
             <div class="review_item">
                 <h1 class="review-title">Оценить проект</h1>
                 <div>
-                    <img class="review_stars" src="/images/star_full.png">
-                    <img class="review_stars" src="/images/star_full.png">
-                    <img class="review_stars" src="/images/star_full.png">
-                    <img class="review_stars" src="/images/star_empty.png">
-                    <img class="review_stars" src="/images/star_empty.png">
+                    <div class="rating"></div>
+                    <script src="{% static 'js/rating.js' %}"></script>
                 </div>
                 <h2>Оставить отзыв</h2>
                 <p class="review_text">Здесь написан небольшой отзыв на проект, пожелания, что можно добавить, убрать или исправить</p>
             </div>
             <div class="review_item">
-                <img src="/images/review_img.png">
+                <img src="{% static 'images/review_img.png' %}">
             </div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="footer_logo">
-            <img class="footer_logo-img" src="/images/Logo.png">
+            <img class="footer_logo-img" src="{% static 'images/Logo.png' %}">
         </div>
         <div class="footer_nav">
             <a class="nav_link">Главная</a>

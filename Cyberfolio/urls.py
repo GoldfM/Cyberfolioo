@@ -27,5 +27,6 @@ urlpatterns = [
     path('welcome/', welcome, name='welcome'),
     path('form', wtfForm, name='form'),
     path(r'form1/<name>/<surname>/<sursurname>', wtfForm1, name='form1'),
+    path('project', projectView, name='project')
 ]
 
