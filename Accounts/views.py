@@ -3,10 +3,11 @@ import random
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from Accounts.forms import *
 from Accounts.models import *
 
@@ -94,15 +95,16 @@ class Profile(DetailView): #Ну тут вообще надо сделать б�
     template_name = 'user_profile.html'
     context_object_name = 'user'
 
-    def get_object(self, queryset=None):
+    '''def get_object(self, queryset=None):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
         try:
             return queryset.get(slug=slug)
         except PostDoesNotExist:
-            raise Http404('Ох, нет объекта;)')
+            raise Http404('Ох, нет объекта;)')'''
     def get(self, request, *args, **kwargs):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
-        user_profile = User.objects.get(slug=slug)
+        user_profile = get_object_or_404(User,slug=slug)
+        #user_profile = User.objects.get(slug=slug)
         if request.user.is_authenticated:
             if user_profile.id == request.user.id:
                 # Пользователь открывает свой профиль
@@ -116,5 +118,20 @@ class Profile(DetailView): #Ну тут вообще надо сделать б�
         context['projects'] = Project.objects.all()
         return context
 
-class EditProfile(DetailView):
+class ProfileUpdateView(UpdateView):
     model = User
+    enctype="multipart/form-data"
+    fields = ['first_name', 'last_name', 'sur_sur_name', 'spec', 'vk_url', 'hh_url', 'behance_url', 'descriptions', 'photo']
+    template_name = 'profile_settings.html'
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        user_profile = get_object_or_404(User,slug=slug)
+        #user_profile = User.objects.get(slug=slug)
+        if request.user.is_authenticated:
+            if user_profile.id == request.user.id:
+                self.object = self.get_object()
+                return super().get(request, *args, **kwargs)
+        raise PermissionDenied()
+
+
+

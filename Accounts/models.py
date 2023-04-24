@@ -13,7 +13,7 @@ class User(AbstractUser):
     slug = models.SlugField(verbose_name='Слаг', unique=True)
     descriptions = models.TextField(max_length=300, verbose_name='Описание',blank=True)
     email = models.EmailField(verbose_name='Почта',blank=True)
-    spec = models.ForeignKey('Specs', db_index=True, on_delete=models.PROTECT, verbose_name="Спецализация",blank=True, default=1)
+    spec = models.ForeignKey('Specs', db_index=True, on_delete=models.PROTECT, verbose_name="Специализация",blank=True, default=1)
     photo = models.ImageField(upload_to=user_directory_path, blank=True, verbose_name="Фото")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     vk_url = models.URLField(max_length=128, blank=True, verbose_name='VK')
@@ -24,7 +24,6 @@ class User(AbstractUser):
         return self.slug
 
     def save(self, *args, **kwargs):
-
         # Slugify (Cyrillic)
         alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z',
                     'и': 'i',
@@ -34,8 +33,6 @@ class User(AbstractUser):
                     'я': 'ya'}
 
         self.slug = slugify(''.join(alphabet.get(w, w) for w in self.username.lower()))
-        #self.password=self.set_password(self.password)
-        #self.slug = slugify(''.join(alphabet.get(w, w) for w in (self.first_name+self.last_name).lower()))
         super(User, self).save(*args, **kwargs)
 
 
@@ -56,7 +53,7 @@ class User(AbstractUser):
     def count_followings(self):
         return len(self.get_followings())
     def get_absolute_url(self):
-        return reverse('user', kwargs={'user': self.slug})
+        return reverse('profile', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = 'Юзер'
