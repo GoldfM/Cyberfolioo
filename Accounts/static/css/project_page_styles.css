@@ -265,17 +265,14 @@ p{
     color: #FF9000;
 }
 
-.rating polygon:hover
-{
+.rating polygon:hover{
   cursor: pointer;
   transition: 500ms;
   border: 2px solid #FF9000;
 }
-.rating polygon
-{
+.rating polygon{
   fill: #D9D9D9;
 }
-.rating polygon.active
-{
+.rating polygon.active{
   fill: #FF9000;
 }
