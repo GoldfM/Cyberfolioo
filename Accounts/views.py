@@ -11,7 +11,8 @@ from django.views.generic import ListView, DetailView, UpdateView
 from Accounts.forms import *
 from Accounts.models import *
 
-
+def projectView(request):
+    return render(request, 'project_page.html')
 
 def wtfForm(request):
     # Первый этап регистрации, если он успешный, то...↓↓↓
