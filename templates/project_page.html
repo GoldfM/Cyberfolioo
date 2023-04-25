@@ -1,50 +1,27 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project</title>
+
+{% block css %}
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/project_page_styles.css' %}">
     <link href = "{% static 'fonts/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
-</head>
-<body>
+{% endblock %}
 
-    <header class="header">
-        <div class="container header-container">
-            <a href="" class="logo">
-                <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
-            </a>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item"><a href="" class="nav-link"></a>Главная</li>
-                    <li class="nav-item"><a href="" class="nav-link"></a>Мои подписки</li>
-                </ul>
-            </nav>
-            <div class="user-container">
-                <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
-                <a href="" class ="profile-link">Мой профиль</a>
-            </div>
-        </div>
-    </header>
-
+{% block content %}
     <main style="display: inline;">
         <div class="hero">
             <div class="hero_info">
-                <h1 class="hero_title">Название проекта</h1>
+                <h1 class="hero_title">{{proj.name}}</h1>
                 <h2>Основные мысли</h2>
-                <p class="hero-description">Здесь небольшой текст, слоган данного проекта, который просто для привлечения внимания
-                    Здесь небольшой текст, слоган данного проекта, который просто для привлечения внимания</p>
+                <p class="hero-description">{{proj.main_idea}}</p>
                 <h2 class="hero-review_title">Оценка проекта</h2>
                 <div class="hero_review">
                     <div class="hero-review_item">
                         <div class="hero_review_stars hero-review_description">
                             <span class="hero-review_item-review">
                                 
-                                3.5 (пользователями)
+                                {{proj.get_rate_registred}} (Зарегистрированными пользователями)
                             </span>  
                         </div>
                     </div>
@@ -52,14 +29,14 @@
                         <div class="hero_review_stars hero-review_description">
                             <span class="hero-review_item-review">
 
-                                4.5 (пользователями)
+                                {{proj.get_rate_unregistred}} (Незарегистрированными пользователями)
                             </span> 
                         </div>
                     </div>
                 </div>
             </div>
             <div class="hero_img">
-                <img class="hero_pic" src="{% static 'images/hero_img.png' %}">
+                <img class="hero_pic" src="{{proj.get_photo}}">
             </div>
         </div>
 
@@ -67,17 +44,14 @@
             <div class="description">
                 <div>
                     <h1 class="description_title">Описание</h1>
-                    <p class="description_text">Здесь довольно большой текст, который служит описанием проект, истории его реализции, для чего он предназначен и чем может помочь другим в использовании <br>
-                        Здесь довольно большой текст, который служит описанием проект, истории его реализции, для чего он предназначен и чем может помочь другим в использовании <br>
-                        Здесь довольно большой текст, который служит описанием проект, истории его реализции, для чего он предназначен и чем может помочь другим в использовании
-                    </p>
+                    <p class="description_text">{{proj.descriptions}}</p>
                 </div>
                 <div class="link_container">
                     <div class="link_container_left-part">
                         Ссылка на скачивание
                     </div>
                     <div class="link_container_right-part">
-                        <a class="description_link" href="/">Здесь типо ссылка на архив</a>
+                        <a class="description_link" href="{{proj.archive_url}}">Здесь типо ссылка на архив</a>
                     </div>
                 </div>
             </div>
@@ -86,24 +60,22 @@
                 <div class="about-project_category_section">
                     <div class="about-project_category">
                         <div class="about-project_category_header">Специализация</div>
-                        <div class="about-project_category_description">Дизайн мобильных приложений</div>
+                        <div class="about-project_category_description">{{proj.spec}}</div>
                     </div>
                     <div class="about-project_category">
                         <div class="about-project_category_header">Срок разработки</div>
-                        <div class="about-project_category_description">3.5 месяца</div>
+                        <div class="about-project_category_description">{{proj.dev_period}}</div>
                     </div>
                     <div class="about-project_category">
                         <div class="about-project_category_header">Тип проекта</div>
-                        <div class="about-project_category_description">Командный</div>
+                        <div class="about-project_category_description">{{proj.type}}</div>
                     </div>
                     <div class="about-project_category">
                         <div class="about-project_category_header">Состав участников</div>
                         <div class="about-project_category_description">
-                            <div class="about-project_category_description_user">Бахарева Анастасия</div>
-                            <div class="about-project_category_description_user">Сизова Екатерина</div>
-                            <div class="about-project_category_description_user">Гольдфарб Михаил</div>
-                            <div class="about-project_category_description_user">Тетюшев Тимофей</div>
-                            <div class="about-project_category_description_user">Воротов Дмитрий</div>
+                            {% for m in proj.get_users %}
+                                <a href="{% url 'profile' slug=m.slug %}" class="about-project_category_description_user" >{{m.get_short_name}}</a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -160,32 +132,4 @@
             </div>
         </div>
     </main>
-
-    <footer class="footer">
-        <div class="footer_logo">
-            <img class="footer_logo-img" src="{% static 'images/Logo.png' %}">
-        </div>
-        <div class="footer_nav">
-            <a class="nav_link">Главная</a>
-            <a class="nav_link">Мои проекты</a>
-            <a class="nav_link">Личный кабинет</a>
-        </div>
-        <div class="about-us_container">
-            <div class="nav_link about-us_heading">О нас</div>
-            <div class="about-us_contacts">
-                <div class="about-us_contacts-left">
-                    <a class="about-us_contacts-text" href="/">Команда ОАО ”УЕЛКИ”</a>
-                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Катерина </a>
-                    <a class="about-us_contacts-text" href="/">Фронтенд-разработчик Тимофей </a>
-                </div>
-                <div class="about-us_contacts-right">
-                    <a class="about-us_contacts-text" href="/">Дизайнер Анастасия</a>
-                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Михаил </a>
-                    <a class="about-us_contacts-text" href="/">Тимлид  Дмитрий</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+{% endblock %}

@@ -28,6 +28,7 @@ urlpatterns = [
     #path('project_set/', Project_set.as_view(), name='project_set'),
     path('welcome/', welcome, name='welcome'),
     path('form', wtfForm, name='form'),
+    path('profile/<slug:profile_slug/project/<slug:post_slug>', ProjectView.as_view(), name='project'),
     path('project', projectView, name='project'),
     path('profile/project/edit-project/<slug:slug>', projectView, name='editProject'),
     path('profile/project/add-project', addProject.as_view(), name='addProject'),

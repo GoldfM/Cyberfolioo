@@ -45,15 +45,21 @@ class User(AbstractUser):
 
     def get_followers(self):
         return Follow.objects.all().filter(follow_to_id=self.id)
+
     def count_followers(self):
         return len(self.get_followers())
 
     def get_followings(self):
         return Follow.objects.all().filter(follow_from_id=self.id)
+
     def count_followings(self):
         return len(self.get_followings())
+
     def get_absolute_url(self):
         return reverse('profile', kwargs={'slug': self.slug})
+
+    def get_short_name(self):
+        return '{0} {1}'.format(self.last_name, self.first_name)
 
     class Meta:
         verbose_name = 'Юзер'
@@ -69,7 +75,7 @@ class Project(models.Model):
     type = models.ForeignKey('TypeProject', on_delete=models.PROTECT, verbose_name='Тип преокта', default=1)
     spec_proj = models.ForeignKey('SpecProject', on_delete=models.PROTECT, verbose_name='Специализация', default=1)
     sum_registred = models.IntegerField(default=0, verbose_name='Сумма оценок зареганных')
-    count_registred = models.IntegerField(default=0, verbose_name='Колисчество оценок зареганных')
+    count_registred = models.IntegerField(default=0, verbose_name='Количество оценок зареганных')
     sum_unregistred = models.IntegerField(default=0, verbose_name='Сумма оценок незареганных')
     count_unregistred = models.IntegerField(default=0, verbose_name='Количество оценок незареганных')
     descriptions = models.TextField(max_length=300, verbose_name='Описание')
@@ -95,14 +101,21 @@ class Project(models.Model):
 
         self.slug = slugify(''.join(alphabet.get(w, w) for w in self.name.lower()))
         super(Project, self).save(*args, **kwargs)
-    def get_photos(self):
-        return Image.objects.all().filter(proj_id=self.id)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('project', kwargs={'user': self.user.slug,'post_slug': self.name})
+        return reverse('project', kwargs={'post_slug': self.slug})
+
+    def get_users(self):
+        return Project.objects.get(slug=self.slug).users.all()
+
+    def get_rate_registred(self):
+        return round(self.sum_registred / self.count_registred, 1)
+
+    def get_rate_unregistred(self):
+        return round(self.sum_unregistred / self.count_unregistred, 1)
 
     class Meta:
         verbose_name = 'Проект'
@@ -113,6 +126,7 @@ class Project(models.Model):
 def image_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
     return 'accounts/projects/{0}/{1}'.format(instance.proj.user.slug, filename)
+
 class Image(models.Model):
     proj = models.ForeignKey('Project', verbose_name='Фото проекта', on_delete=models.CASCADE)
     photo = models.ImageField(upload_to=image_directory_path)
@@ -126,6 +140,7 @@ class Specs(models.Model):
     name = models.CharField(max_length=40, verbose_name="Специализация")
     def __str__(self):
         return self.name
+
     class Meta:
         verbose_name = 'Специализация'
         verbose_name_plural = 'Специализации'
@@ -158,5 +173,7 @@ class Follow(models.Model):
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
         ordering = ['id']
+
+
 
 
