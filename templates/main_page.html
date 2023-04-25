@@ -9,11 +9,14 @@
 {% endblock %}
 
 {% block content %}
+
+
+
 <div class="search_container">
             <div class="search_header">
                 Давайте вдохновимся
             </div>
-            <a href="{% url 'project'%}">Переход к проектам</a>
+            <a href="/">Переход к проектам</a>
             <div class="search_info">
                 <div class="search_form">
                     <div class="input-heading">Имя</div>
@@ -31,48 +34,34 @@
                 </div>
             </div>
         </div>
+
+{% for u in users %}
     <div class="user-card-container">
             <div class="left-section card-container">
-                <div class="user-header">Фамилия Имя</div>
-                <p class="user-text">Здесь какой-то очень длинный общирный текст о себе, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит подробно, информативно и лаконично одновременно</p>
+                <div class="user-header">{{ u.get_short_name }}</div>
+                <p class="user-text">{{ user.descriptions }}</p>
                 <div class="user-statistic-header">Статистика</div>
                 <div class="statistic-container">
                     <ul class="statistic-list">
-                        <li class="statistic-item">0 проекта</li>
-                        <li class="statistic-item">0 подписок</li>
-                        <li class="statistic-item">0 подписчиков</li>
+                        <li class="statistic-item">{{ user.count_projects }} проекта</li>
+                        <li class="statistic-item">{{ user.count_followers }} подписок</li>
+                        <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
                     </ul>
                     <a class="project-link">
                         <h5 class="abour-project">Подробнее</h5>
                         <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
                     </a>
-                    <button class="usual-button submit-button">Подписаться</button>
+                    {% if not is_your_profile %}
+                    <div class="second-colum">
+                        <button class="usual-button submit-button">Подписаться</button>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="right-section card-container">
-                <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
+                <img src="{{ u.photo }}" alt="" class="avatar">
             </div>
         </div>
+{% endfor %}
 
-        <div class="user-card-container another-user-card">
-            <div class="left-section card-container">
-                <div class="user-header">Фамилия Имя</div>
-                <p class="user-text">Здесь какой-то очень длинный общирный текст о себе, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит подробно, информативно и лаконично одновременно</p>
-                <div class="user-statistic-header">Статистика</div>
-                <div class="statistic-container">
-                    <ul class="statistic-list">
-                        <li class="statistic-item">0 проекта</li>
-                        <li class="statistic-item">0 подписок</li>
-                        <li class="statistic-item">0 подписчиков</li>
-                    </ul>
-                    <a class="project-link">
-                        <h5 class="abour-project">Подробнее</h5>
-                        <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
-                    </a>
-                    <button class="usual-button submit-button">Подписаться</button>
-                </div>
-            </div>
-            <div class="right-section card-container">
-                <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
-            </div>
 {% endblock %}

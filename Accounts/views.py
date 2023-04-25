@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import PermissionDenied
+from django.db.models import Count
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -11,8 +12,17 @@ from django.views.generic import ListView, DetailView, UpdateView
 from Accounts.forms import *
 from Accounts.models import *
 
-def projectView(request):
-    return render(request, 'project_page.html')
+class ProjectView(DetailView):
+    model = Project
+    template_name = 'project_page.html'
+    slug_url_kwarg = 'post_slug'
+    context_object_name = 'proj'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = str(context["proj"].name)
+        #c_def = self.get_user_context(title = context["post"])
+        return context
 
 def wtfForm(request):
     # Первый этап регистрации, если он успешный, то...↓↓↓
@@ -72,26 +82,25 @@ def welcome(request):
 
 class Home(ListView):
     paginate_by = 6
-    model = Project
+    model = User
     template_name = "main_page.html"
-    context_object_name = "projects"
+    context_object_name = "users"
 
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['projects'] = Project.objects.all()
-        context['title'] = "Главная"
+        context['title'] = "Главная страница"
         #c_def = self.get_user_context(title = "Главная страница")
         return context
 
-    def get_queryset(self):
-        return Project.objects.all()
+    #def get_queryset(self):
+        #return User.objects.order_by()
 
 
 class PostDoesNotExist:
     pass
 
 
-class Profile(DetailView): #Ну тут вообще надо сделать будет DetailView, так пока чтобы работало
+class Profile(DetailView):
     model = User
     template_name = 'user_profile.html'
     context_object_name = 'user'
@@ -121,7 +130,7 @@ class Profile(DetailView): #Ну тут вообще надо сделать б�
 
 class ProfileUpdateView(UpdateView):
     model = User
-    enctype="multipart/form-data"
+    enctype = "multipart/form-data"
     fields = ['first_name', 'last_name', 'sur_sur_name', 'spec', 'vk_url', 'hh_url', 'behance_url', 'descriptions', 'photo']
     template_name = 'profile_settings1.html'
     def get(self, request, *args, **kwargs):

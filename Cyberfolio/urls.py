@@ -28,10 +28,11 @@ urlpatterns = [
     #path('project_set/', Project_set.as_view(), name='project_set'),
     path('welcome/', welcome, name='welcome'),
     path('form', wtfForm, name='form'),
-    path('project', projectView, name='project')
+    path('project/<slug:post_slug>', ProjectView.as_view(), name='project'),
     path('form1/<name>/<surname>/<sursurname>', wtfForm1, name='form1'),
     path('profile/<slug:slug>/edit', ProfileUpdateView.as_view(), name='editProfile'),
 ]
 urlpatterns += static(settings.MEDIA_URL,
                               document_root=settings.MEDIA_ROOT)
 
+#
