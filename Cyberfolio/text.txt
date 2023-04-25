@@ -1,2 +1,33 @@
-Предлагаю писать как в C# camelCase
+python manage.py createsuperuser
+admin
+admin@admin.com
+1234
+1234
+y
+python manage.py runserver
 
+
+
+
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell
+from Accounts.models import *
+
+a = Specs(name='Не указано')
+
+a.save()
+a = TypeProject(type = 'Командный')
+a.save()
+a = TypeProject(type = 'Рабочий')
+a.save()
+a = TypeProject(type = 'Конкурсный')
+a.save()
+a = SpecProject(name='Не указано')
+a.save()
+a = SpecProject(name='Разное')
+a.save()
+a = SpecProject(name='Дизайн')
+a.save()
+exit()

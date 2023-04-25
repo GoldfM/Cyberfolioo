@@ -76,7 +76,7 @@
                     <input style="display: none;" required type="text" name="last-name" placeholder="Ссылка на профиль" class="input main_input">
                     <input style="display: none;" required type="text" name="last-name" placeholder="Ссылка на профиль" class="input main_input">
                     <div>
-                        <img class="user_img" src="/images/user.png">
+                        <img class="user_img" src="{% static '/images/user.png' %}">
                         <span class="people_add">+Добавить участника</span>
                     </div>
                     
@@ -94,21 +94,21 @@
                 <div class="photos_text"><span class="photos_main-word">Основное фото</span> - будет использоваться как задний фон на аватарке и главное фото, в панеле отзывов. Поэтому оно должно быть информативным </div>
                 <div class="photos_img">
                     <div>
-                        <img class="photos_img_item" src="/images/project_settings_1.png">
+                        <img class="photos_img_item" src="{% static '/images/project_settings_1.png'%}'">
                     </div>
                     <br>
                     <div>
-                        <img class="photos_img_item" src="/images/project_settings_2.png">
+                        <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">
                     </div>
                     
                 </div>
                 <div class="addition">
                     <div class="photos_add">
-                        <img class="photo_add_icon" src="/images/photo.png">
+                        <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
                         <span class="photos_add-text">Добавить аватарку проекта</span>
                     </div>
                     <div class="photos_add">
-                        <img class="photo_add_icon" src="/images/photo.png">
+                        <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
                         <span class="photos_add-text">Добавить основное фото</span>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
 
     <footer class="footer">
         <div class="footer_logo">
-            <img class="footer_logo-img" src="/images/Logo.png">
+            <img class="footer_logo-img" src="{% static '/images/Logo.png'%}">
         </div>
         <div class="footer_nav">
             <a class="nav_link">Главная</a>

@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,26 +117,32 @@
         {% if is_your_profile %}
         <div class="add-project-aria">
             <img class="add-project-icon" src="{% static 'images/add-project-icon.png' %}">
-            <a href="" class="add-project-link"><div class="add-project">+Добавить новый проект</div></a>
+            <a href="{% url 'addProject' %}" class="add-project-link"><div class="add-project">+Добавить новый проект</div></a>
         </div>
         {% endif %}
     </div>
-    <div class="container third-container">
-        <div class="project-avatar-aria">
-            <img class="project-avatar" src="{% static '/images/project-avatar.png' %}" alt="">
-        </div>
-        <div class="project-info-aria">
-            <h3 class="project-name">Название проекта</h3>
-            <p class="project-info user-text">Здесь какой-то очень длинный общирный текст о проекте, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит подробно, информативно и лаконично одновременно
-                Здесь какой-то очень длинный общирный текст о проекте, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит</p>
-            <div class="about-project-section">
-                <a class="project-link">
-                    <h5 class="abour-project">Подробнее</h5>
-                    <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
-                </a>
+    {% for project in projects %}
+        <div class="container third-container">
+            <div class="project-avatar-aria">
+                {% if project.avatar_image %}
+                    <img src="{{ project.avatar_image.url }}" alt="" class="avatar">
+                {% else %}
+                    <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
+                {% endif %}
+            </div>
+            <div class="project-info-aria">
+                <h3 class="project-name">{{ project.name }}</h3>
+                <p class="project-info user-text">{{ project.key_words }}</p>
+                <div class="about-project-section">
+                    <a class="project-link">
+                        <h5 class="abour-project">Подробнее</h5>
+                        <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    {% endfor %}
+
 </main>
 
 <footer class="footer">

@@ -7,7 +7,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from Accounts.forms import *
 from Accounts.models import *
 
@@ -32,9 +32,24 @@ def wtfForm(request):
     return render(request, 'registration.html', {'form': form })
 
 
+class addProject(CreateView):
+    model = Project
+    enctype = "multipart/form-data"
+    template_name = "project_add.html"
+    success_url = reverse_lazy('home')
+    fields = ['name', 'type', 'key_words' ,'spec_proj', 'descriptions', 'time_developing',
+              'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        form.instance.user = self.request.user
+        print(self.request.user)
+        return super(addProject, self).form_valid(form)
+
 
 def wtfForm1(request, name,surname, sursurname):
     if request.method == 'POST':
+        username = request.POST['username']
         username = request.POST['username']
         pass1 = request.POST['password1']
         pass2 = request.POST['password2']
@@ -105,14 +120,15 @@ class Profile(DetailView): #Ну тут вообще надо сделать б�
     def get(self, request, *args, **kwargs):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
         user_profile = get_object_or_404(User,slug=slug)
+        is_your_profile = False
         #user_profile = User.objects.get(slug=slug)
         if request.user.is_authenticated:
             if user_profile.id == request.user.id:
+                is_your_profile = True
                 # Пользователь открывает свой профиль
-                return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': True})
 
           # Пользователь открывает профиль другого пользователя
-        return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': False})
+        return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': is_your_profile, 'projects':user_profile.get_projects()})
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
