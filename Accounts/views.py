@@ -3,10 +3,11 @@ import random
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect, QueryDict, HttpResponse
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from Accounts.forms import *
 from Accounts.models import *
 
@@ -85,25 +86,72 @@ class Home(ListView):
     def get_queryset(self):
         return Project.objects.all()
 
+
+class PostDoesNotExist:
+    pass
+
+
 class Profile(DetailView): #Ну тут вообще надо сделать будет DetailView, так пока чтобы работало
     model = User
     template_name = 'user_profile.html'
     context_object_name = 'user'
 
+    '''def get_object(self, queryset=None):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        try:
+            return queryset.get(slug=slug)
+        except PostDoesNotExist:
+            raise Http404('Ох, нет объекта;)')'''
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        user_profile = get_object_or_404(User,slug=slug)
+        #user_profile = User.objects.get(slug=slug)
+        if request.user.is_authenticated:
+            if user_profile.id == request.user.id:
+                # Пользователь открывает свой профиль
+                return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': True})
+
+          # Пользователь открывает профиль другого пользователя
+        return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': False})
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['projects'] = Project.objects.all()
         return context
 
-@login_required
-def profile(request, slug):
-    user_profile = get_object_or_404(User, slug=slug)
-    if user_profile.user.id == request.user.id:
-        # Пользователь открывает свой профиль
-        # Добавьте здесь ваш код для обработки этого случая
-        return render(request, 'user_profile.html', {'user_profile': user_profile})
-    else:
-        # Пользователь открывает профиль другого пользователя
-        # Добавьте здесь ваш код для обработки этого случая
-        return render(request, 'myapp/other_profile.html', {'user_profile': user_profile})
+class ProfileUpdateView(UpdateView):
+    model = User
+    enctype="multipart/form-data"
+    fields = ['first_name', 'last_name', 'sur_sur_name', 'spec', 'vk_url', 'hh_url', 'behance_url', 'descriptions', 'photo']
+    template_name = 'profile_settings1.html'
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        user_profile = get_object_or_404(User, slug=slug)
+        #user_profile = User.objects.get(slug=slug)
+        if request.user.is_authenticated:
+            if user_profile.id == request.user.id:
+                self.object = self.get_object()
+                return super().get(request, *args, **kwargs)
+        raise PermissionDenied()
+    def post(self, request, *args, **kwargs):
+        user_profile = get_object_or_404(User, slug=self.kwargs.get(self.slug_url_kwarg, None))
+        print(user_profile.first_name)
+
+        if 'first_name' not in request.POST:
+            request.POST = {**request.POST,
+                            'first_name': user_profile.first_name,
+                            'last_name': user_profile.last_name,
+                            'spec': user_profile.spec,
+                            'sur_sur_name': user_profile.sur_sur_name,
+                            'vk_url': user_profile.vk_url,
+                            'hh_url': user_profile.hh_url,
+                            'descriptions': user_profile.descriptions,
+                            'behance_url': user_profile.behance_url}
+
+
+        return  super().post(request, args, kwargs)
+
+
+
+
+

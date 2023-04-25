@@ -41,25 +41,32 @@
 <main>
     <section class="main-section">
         <div class="container main-container">
-                <form action="" autocomplete enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            <div class="photo-container add-image-form">
+            <div class="photo-container">
                 {% if user.photo %}
                    <img src="{{ user.photo.url}}" alt="">
                 {% else %}
                 <img src="{% static '/images/user-image.png' %}" alt="">
                 {% endif %}
+                <form action="" autocomplete method="POST" enctype="multipart/form-data" class="add-image-form">
                     <div class="input-wrapper">
-                        <img src="{% static '/images/photo-icon.svg' %}" alt="" class="add-photo-icon">
-                        {{ form.photo}}
-                        {% render_field form.photo value="Добавить фото" hidden=True accept="image/*,image/jpeg" id="input_file" class="input_file" %}
-                <label for="input_file" class="input-photo-label">Добавить фото</label>
+                    {% csrf_token %}
 
-{#                       {% render_field form.photo accept="image/*" %}#}
+                       {% render_field form.photo value="Добавить фото" accept="image/*,image/jpeg" id="input_file" class="input_file" %}
+
+                        <img src="{% static '/images/photo-icon.svg' %}" alt="" class="add-photo-icon">
+                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_file" class="input_file">
+                        <label for="input_file" class="input-photo-label">Добавить фото</label>
                     </div>
+                    <div class="submit-section photo-submit-section">
+                        <img src="{% static '/images/galochka.svg' %}" alt="" class="galochka-icon">
+                        <input type="submit" value="Сохранить" class="save-button">
+                    </div>
+                </form>
             </div>
-            <div class="redactor-container information-form">
+            <div class="redactor-container">
                 <h1 class="redactor-heading">Редактировать данные</h1>
+                <form action="" autocomplete method="POST" class="information-form">
+                    {% csrf_token %}
 
                     <div class="colum-fields">
                         <div class="colum first-colum">

@@ -28,7 +28,7 @@
         <div class="user-container">
             <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
             {% if user.is_authenticated %}
-                <a href="{% url 'profile' slug=user.slug %}" class ="profile-link">Мой профиль</a>
+                <a href="{% url 'profile' slug=request.user.slug %}" class ="profile-link">Мой профиль</a>
             {% else %}
                 <a href="{% url 'welcome'%}" class ="profile-link">Мой профиль</a>
 
@@ -53,9 +53,11 @@
                             <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
                         </ul>
                     </div>
+                    {% if not is_your_profile %}
                     <div class="second-colum">
                         <button class="usual-button submit-button">Подписаться</button>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -63,7 +65,8 @@
             <div class="personal-user-info">
                 <h4 class="personal-header">Имя Фамилия</h4>
                 <p class="personal-item">{{ user.first_name }}</p>
-                <p class="personal-item">{{ user.last_name}} {{user.sur_sur_name}}</p>
+                <p class="personal-item">{{ user.last_name}} </p>
+            <p class="personal-item">{{user.sur_sur_name}} </p>
                 <h4 class="personal-header">Специализация</h4>
                 <p class="personal-item">{{ user.spec }}</p>
                 <ul class="user-contacts">
@@ -90,23 +93,32 @@
                         </a>
                     </li>
                     {% endif %}
-
                 </ul>
             </div>
             <div class="user-avatar">
-                <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
-                <a href="" class="redactor-link">
+                {% if user.photo %}
+                    <img src="{{user.photo.url}}" alt="" class="avatar">
+                {% else %}
+                    <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
+                {% endif %}
+                {% if is_your_profile %}
+                <a href="{% url 'editProfile' slug=request.user.slug %}" class="redactor-link">
                     <img src="{% static '/images/redactor-icon.svg' %}" alt="" class="redactor-icon">
+
                 </a>
+                {% endif %}
             </div>
         </div>
     </div>
     <div class="container second-container">
         <h1 class="projects-header">Проекты</h1>
+
+        {% if is_your_profile %}
         <div class="add-project-aria">
             <img class="add-project-icon" src="{% static 'images/add-project-icon.png' %}">
             <a href="" class="add-project-link"><div class="add-project">+Добавить новый проект</div></a>
         </div>
+        {% endif %}
     </div>
     <div class="container third-container">
         <div class="project-avatar-aria">
