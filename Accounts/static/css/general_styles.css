@@ -301,3 +301,13 @@ h2 {
   margin-bottom: 1.45vw;
   padding: 1.35vw 1.25vw 1.35vw 1.25vw;
 }
+
+.subscribe{
+  background-color: #feb250;
+  color: #f8f6f8 !important;
+}
+
+.unsubscribe{
+  background-color: #f8f6f8;
+  color: #feb250 !important;
+}
