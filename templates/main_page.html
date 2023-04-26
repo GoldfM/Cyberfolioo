@@ -38,15 +38,15 @@
     <div class="user-card-container">
             <div class="left-section card-container">
                 <div class="user-header">{{ u.get_short_name }}</div>
-                <p class="user-text">{{ user.descriptions }}</p>
+                <p class="user-text">{{ u.descriptions }}</p>
                 <div class="user-statistic-header">Статистика</div>
                 <div class="statistic-container">
                     <ul class="statistic-list">
-                        <li class="statistic-item">{{ user.count_projects }} проекта</li>
-                        <li class="statistic-item">{{ user.count_followers }} подписок</li>
-                        <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
+                        <li class="statistic-item">{{ u.count_projects }} проекта</li>
+                        <li class="statistic-item">{{ u.count_followers }} подписок</li>
+                        <li class="statistic-item">{{ u.count_followings }} подписчиков</li>
                     </ul>
-                    <a class="project-link">
+                    <a href="{% url 'profile' slug=u.slug %}" class="project-link">
                         <h5 class="abour-project">Подробнее</h5>
                         <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
                     </a>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="right-section card-container">
-                <img src="{{ u.photo }}" alt="" class="avatar">
+                <img src="{{ u.photo.url }}" alt="" class="avatar">
             </div>
         </div>
 {% endfor %}

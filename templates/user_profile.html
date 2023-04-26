@@ -104,7 +104,7 @@
                 <h3 class="project-name">{{ project.name }}</h3>
                 <p class="project-info user-text">{{ project.key_words }}</p>
                 <div class="about-project-section">
-                    <a class="project-link">
+                    <a href="{% url 'project' profile_slug=user.slug post_slug=project.slug %}" class="project-link">
                         <h5 class="abour-project">Подробнее</h5>
                         <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
                     </a>

@@ -36,7 +36,9 @@
                 </div>
             </div>
             <div class="hero_img">
-                <img class="hero_pic" src="{{proj.get_photo.url}}">
+                {% if proj.avatar_image %}
+                    <img class="hero_pic" src="{{proj.avatar_image.url}}">
+                {% endif %}
             </div>
         </div>
 
