@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-
+<div class="users">
 {% for u in users %}
     <div class="user-card-container">
             <div class="left-section card-container">
@@ -52,7 +52,7 @@
                     </a>
                     {% if not is_your_profile %}
                     <div class="second-colum">
-                        <button class="usual-button submit-button">Подписаться</button>
+                        <button class="usual-button submit-button subscribe" data-subscribe="no">Подписаться</button>
                     </div>
                     {% endif %}
                 </div>
@@ -64,5 +64,23 @@
             </div>
         </div>
 {% endfor %}
+</div>
+<script>
+    document.querySelector('.users').addEventListener('click', event => {
+    if (event.target.classList.contains('subscribe')){
+        event.target.innerHTML = "Отписаться";
+        event.target.classList.remove('subscribe');
+        event.target.classList.add('unsubscribe');
+        event.target.dataset.subscribe = 'yes';
+    }
+    else if(event.target.classList.contains('unsubscribe')){
+        event.target.innerHTML = "Подписаться";
+        event.target.classList.remove('unsubscribe');
+        event.target.classList.add('subscribe');
+        event.target.dataset.subscribe = 'no';
+    }
+});
+</script>
+
 
 {% endblock %}

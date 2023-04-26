@@ -237,6 +237,7 @@ p{
 }
 
 .review-title{
+    margin: 0;
     margin-bottom: 1.45vw;
 }
 
@@ -265,14 +266,17 @@ p{
     color: #FF9000;
 }
 
-.rating polygon:hover{
-  cursor: pointer;
-  transition: 500ms;
-  border: 2px solid #FF9000;
+.rating{
+    width: 18vw;
+    display: flex;
 }
-.rating polygon{
+
+.star,
+.reserved_star,
+.unreserved_star{
   fill: #D9D9D9;
 }
-.rating polygon.active{
+
+.active{
   fill: #FF9000;
 }
