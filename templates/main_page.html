@@ -58,7 +58,9 @@
                 </div>
             </div>
             <div class="right-section card-container">
+                {% if u.photo %}
                 <img src="{{ u.photo.url }}" alt="" class="avatar">
+                {% endif %}
             </div>
         </div>
 {% endfor %}

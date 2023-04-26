@@ -25,7 +25,6 @@ urlpatterns = [
     path('login/', LoginUser.as_view(), name='login'),
     path('', Home.as_view(), name='home'),
     path('profile/<slug:slug>', Profile.as_view(), name='profile'),
-    #path('project_set/', Project_set.as_view(), name='project_set'),
     path('welcome/', welcome, name='welcome'),
     path('form', wtfForm, name='form'),
     path('profile/<slug:profile_slug>/project/<slug:post_slug>', ProjectView.as_view(), name='project'),

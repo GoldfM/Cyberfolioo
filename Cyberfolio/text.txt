@@ -25,6 +25,9 @@ from Accounts.models import *
 a = Specs(name='Не указано')
 
 a.save()
+
+a = TypeProject(type = 'Индивидуальный')
+a.save()
 a = TypeProject(type = 'Командный')
 a.save()
 a = TypeProject(type = 'Рабочий')
