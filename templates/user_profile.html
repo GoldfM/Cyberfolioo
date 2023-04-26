@@ -1,43 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.25">
-    <title>Cyberfolio profile settings</title>
+
+{% block css %}
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/user-profile_styles.css' %}">
     <link href = "{% static 'fonts/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
-    
-</head>
-<body>
-    
-<header class="header">
-    <div class="container header-container">
-        <a href="{% url 'home' %}" class="logo">
-            <img src="{% static 'images/Logo.png' %}" alt="" class="logo-img">
-        </a>
-        <nav class="nav">
-            <ul class="nav-list">
-                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"></a>Главная</li>
-                <li class="nav-item"><a href="" class="nav-link"></a>Мои подписки</li>
-            </ul>
-        </nav>
-        <div class="user-container">
-            <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
-            {% if user.is_authenticated %}
-                <a href="{% url 'profile' slug=user.slug %}" class ="profile-link">Мой профиль</a>
-            {% else %}
-                <a href="{% url 'welcome'%}" class ="profile-link">Мой профиль</a>
+{% endblock %}
 
-            {% endif %}
-        </div>
-    </div>
-</header>
-
-<main>
+{% block content %}
     <div class="container user-info-container">
         <div class="left-user-section">
             <h1 class="user-header">{{ user.first_name }} {{ user.last_name }}</h1>
@@ -53,9 +24,11 @@
                             <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
                         </ul>
                     </div>
+                    {% if not is_your_profile %}
                     <div class="second-colum">
                         <button class="usual-button submit-button">Подписаться</button>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -63,7 +36,8 @@
             <div class="personal-user-info">
                 <h4 class="personal-header">Имя Фамилия</h4>
                 <p class="personal-item">{{ user.first_name }}</p>
-                <p class="personal-item">{{ user.last_name}} {{user.sur_sur_name}}</p>
+                <p class="personal-item">{{ user.last_name}} </p>
+            <p class="personal-item">{{user.sur_sur_name}} </p>
                 <h4 class="personal-header">Специализация</h4>
                 <p class="personal-item">{{ user.spec }}</p>
                 <ul class="user-contacts">
@@ -90,67 +64,55 @@
                         </a>
                     </li>
                     {% endif %}
-
                 </ul>
             </div>
             <div class="user-avatar">
-                <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
-                <a href="" class="redactor-link">
+                {% if user.photo %}
+                    <img src="{{user.photo.url}}" alt="" class="avatar">
+                {% else %}
+                    <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
+                {% endif %}
+                {% if is_your_profile %}
+                <a href="{% url 'editProfile' slug=request.user.slug %}" class="redactor-link">
                     <img src="{% static '/images/redactor-icon.svg' %}" alt="" class="redactor-icon">
+
                 </a>
+                {% endif %}
             </div>
         </div>
     </div>
     <div class="container second-container">
         <h1 class="projects-header">Проекты</h1>
+
+        {% if is_your_profile %}
         <div class="add-project-aria">
             <img class="add-project-icon" src="{% static 'images/add-project-icon.png' %}">
-            <a href="" class="add-project-link"><div class="add-project">+Добавить новый проект</div></a>
+            <a href="{% url 'addProject' %}" class="add-project-link"><div class="add-project">+Добавить новый проект</div></a>
         </div>
+        {% endif %}
     </div>
-    <div class="container third-container">
-        <div class="project-avatar-aria">
-            <img class="project-avatar" src="{% static '/images/project-avatar.png' %}" alt="">
-        </div>
-        <div class="project-info-aria">
-            <h3 class="project-name">Название проекта</h3>
-            <p class="project-info user-text">Здесь какой-то очень длинный общирный текст о проекте, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит подробно, информативно и лаконично одновременно
-                Здесь какой-то очень длинный общирный текст о проекте, который зачастую не заполняют, но он должен быть, потому что вместе с ним выглядит</p>
-            <div class="about-project-section">
-                <a class="project-link">
-                    <h5 class="abour-project">Подробнее</h5>
-                    <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
-                </a>
+    {% for project in projects %}
+        <div class="container third-container">
+            <div class="project-avatar-aria">
+                {% if project.avatar_image %}
+                    <img src="{{ project.avatar_image.url }}" alt="" class="avatar">
+                {% else %}
+                    <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
+                {% endif %}
             </div>
-        </div>
-    </div>
-</main>
-
-<footer class="footer">
-        <div class="footer_logo">
-            <img class="footer_logo-img" src="{% static '/images/Logo.png' %}">
-        </div>
-        <div class="footer_nav">
-            <a class="nav_link">Главная</a>
-            <a class="nav_link">Мои проекты</a>
-            <a class="nav_link">Личный кабинет</a>
-        </div>
-        <div class="about-us_container">
-            <div class="nav_link about-us_heading">О нас</div>
-            <div class="about-us_contacts">
-                <div class="about-us_contacts-left">
-                    <a class="about-us_contacts-text" href="/">Команда ОАО ”УЕЛКИ”</a>
-                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Катерина </a>
-                    <a class="about-us_contacts-text" href="/">Фронтенд-разработчик Тимофей </a>
-                </div>
-                <div class="about-us_contacts-right">
-                    <a class="about-us_contacts-text" href="/">Дизайнер Анастасия</a>
-                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Михаил </a>
-                    <a class="about-us_contacts-text" href="/">Тимлид  Дмитрий</a>
+            <div class="project-info-aria">
+                <h3 class="project-name">{{ project.name }}</h3>
+                <p class="project-info user-text">{{ project.key_words }}</p>
+                <div class="about-project-section">
+                    <a href="{% url 'project' profile_slug=user.slug post_slug=project.slug %}" class="project-link">
+                        <h5 class="abour-project">Подробнее</h5>
+                        <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
+                    </a>
                 </div>
             </div>
         </div>
-    </footer>
+    {% endfor %}
+{% endblock %}
 
 </body>
 </html>

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile_styles.css' %}">
+    <link href = "{% static 'fonts/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+{% endblock %}
+
+{% block content %}
+    <section class="main-section">
+        <div class="container main-container">
+            <div class="photo-container">
+                {% if user.photo %}
+                   <img src="{{ user.photo.url}}" alt="">
+                {% else %}
+                <img src="{% static '/images/user-image.png' %}" alt="">
+                {% endif %}
+                <form action="" autocomplete method="POST" enctype="multipart/form-data" class="add-image-form">
+                    <div class="input-wrapper">
+                    {% csrf_token %}
+
+                       {% render_field form.photo value="Добавить фото" accept="image/*,image/jpeg" id="input_file" class="input_file" %}
+
+                        <img src="{% static '/images/photo-icon.svg' %}" alt="" class="add-photo-icon">
+                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_file" class="input_file">
+                        <label for="input_file" class="input-photo-label">Добавить фото</label>
+                    </div>
+                    <div class="submit-section photo-submit-section">
+                        <img src="{% static '/images/galochka.svg' %}" alt="" class="galochka-icon">
+                        <input type="submit" value="Сохранить" class="save-button">
+                    </div>
+                </form>
+            </div>
+            <div class="redactor-container">
+                <h1 class="redactor-heading">Редактировать данные</h1>
+                <form action="" autocomplete method="POST" class="information-form">
+                    {% csrf_token %}
+
+                    <div class="colum-fields">
+                        <div class="colum first-colum">
+                        <div class="input-heading">Фамилия</div>
+
+
+                        {% render_field form.last_name class="input first-input" %}
+
+                        <div class="input-heading">Имя</div>
+                        {% render_field form.first_name class="input first-input" %}
+
+                        <div class="input-heading">Отчество (при наличии)</div>
+                        {% render_field form.sur_sur_name class="input first-input" %}
+                        </div>
+                        <div class="colum second-colum">
+                        <div class="input-heading">Специализация</div>
+                            {% render_field form.spec class="input secon-input" %}
+                        <div class="input-heading">Контакты</div>
+                        {% render_field form.vk_url placeholder="Ссылка на вк" class="input secon-input" %}
+                        {% render_field form.hh_url placeholder="Ссылка на резюме на hh.ru" class="input secon-input" %}
+                        {% render_field form.behance_url placeholder="Ссылка на резюме на behance" class="input secon-input" %}
+
+                        </div>
+                    </div>
+                    <strong class="input-heading textarea-heading">О себе</strong>
+                    {% render_field form.descriptions placeholder="Расскажите кратко о себе" class="textarea" %}
+
+
+                    <div class="submit-section info-submit-section">
+                        <img src="{% static '/images/galochka.svg' %}" alt="" class="galochka-icon">
+                        <input type="submit" value="Сохранить изменения" class="save-button">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

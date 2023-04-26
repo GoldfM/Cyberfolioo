@@ -65,7 +65,7 @@ button {
     display: flex;
     flex-direction:row;
     width: 100%;
-    justify-content:space-around;
+    justify-content:space-between;
     margin-top: 0px;
 }
 

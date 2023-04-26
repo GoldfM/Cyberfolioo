@@ -3,14 +3,30 @@ import random
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.http import HttpResponseRedirect, QueryDict, HttpResponse
+from django.core.exceptions import PermissionDenied
+from django.db.models import Count
+from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView
 from Accounts.forms import *
 from Accounts.models import *
 
+class ProjectView(DetailView):
+    model = Project
+    template_name = 'project_page.html'
+    slug_url_kwarg = 'post_slug'
+    context_object_name = 'proj'
+    def get_queryset(self, queryset=None):
+        user = get_object_or_404(User, slug = self.request.path_info.split('/')[2])
+        return user.get_projects()
 
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = str(context["proj"].name)
+        #c_def = self.get_user_context(title = context["post"])
+        return context
 
 def wtfForm(request):
     # Первый этап регистрации, если он успешный, то...↓↓↓
@@ -30,9 +46,24 @@ def wtfForm(request):
     return render(request, 'registration.html', {'form': form })
 
 
+class addProject(CreateView):
+    model = Project
+    enctype = "multipart/form-data"
+    template_name = "project_add.html"
+    success_url = reverse_lazy('home')
+    fields = ['name', 'type', 'key_words' ,'spec_proj', 'descriptions', 'time_developing',
+              'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        form.instance.user = self.request.user
+        print(self.request.user)
+        return super(addProject, self).form_valid(form)
+
 
 def wtfForm1(request, name,surname, sursurname):
     if request.method == 'POST':
+        username = request.POST['username']
         username = request.POST['username']
         pass1 = request.POST['password1']
         pass2 = request.POST['password2']
@@ -70,39 +101,86 @@ def welcome(request):
 
 class Home(ListView):
     paginate_by = 6
-    model = Project
+    model = User
     template_name = "main_page.html"
-    context_object_name = "projects"
+    context_object_name = "users"
 
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['projects'] = Project.objects.all()
-        context['title'] = "Главная"
+        context['title'] = "Главная страница"
         #c_def = self.get_user_context(title = "Главная страница")
         return context
 
-    def get_queryset(self):
-        return Project.objects.all()
+    #def get_queryset(self):
+        #return User.objects.order_by()
 
-class Profile(DetailView): #Ну тут вообще надо сделать будет DetailView, так пока чтобы работало
+
+class PostDoesNotExist:
+    pass
+
+
+class Profile(DetailView):
     model = User
     template_name = 'user_profile.html'
     context_object_name = 'user'
 
+    '''def get_object(self, queryset=None):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        try:
+            return queryset.get(slug=slug)
+        except PostDoesNotExist:
+            raise Http404('Ох, нет объекта;)')'''
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        user_profile = get_object_or_404(User,slug=slug)
+        is_your_profile = False
+        #user_profile = User.objects.get(slug=slug)
+        if request.user.is_authenticated:
+            if user_profile.id == request.user.id:
+                is_your_profile = True
+                # Пользователь открывает свой профиль
+
+          # Пользователь открывает профиль другого пользователя
+        return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': is_your_profile, 'projects':user_profile.get_projects()})
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['projects'] = Project.objects.all()
         return context
 
-@login_required
-def profile(request, slug):
-    user_profile = get_object_or_404(User, slug=slug)
-    if user_profile.user.id == request.user.id:
-        # Пользователь открывает свой профиль
-        # Добавьте здесь ваш код для обработки этого случая
-        return render(request, 'user_profile.html', {'user_profile': user_profile})
-    else:
-        # Пользователь открывает профиль другого пользователя
-        # Добавьте здесь ваш код для обработки этого случая
-        return render(request, 'myapp/other_profile.html', {'user_profile': user_profile})
+class ProfileUpdateView(UpdateView):
+    model = User
+    enctype = "multipart/form-data"
+    fields = ['first_name', 'last_name', 'sur_sur_name', 'spec', 'vk_url', 'hh_url', 'behance_url', 'descriptions', 'photo']
+    template_name = 'profile_settings1.html'
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get(self.slug_url_kwarg, None)
+        user_profile = get_object_or_404(User, slug=slug)
+        #user_profile = User.objects.get(slug=slug)
+        if request.user.is_authenticated:
+            if user_profile.id == request.user.id:
+                self.object = self.get_object()
+                return super().get(request, *args, **kwargs)
+        raise PermissionDenied()
+    def post(self, request, *args, **kwargs):
+        user_profile = get_object_or_404(User, slug=self.kwargs.get(self.slug_url_kwarg, None))
+        print(user_profile.first_name)
+
+        if 'first_name' not in request.POST:
+            request.POST = {**request.POST,
+                            'first_name': user_profile.first_name,
+                            'last_name': user_profile.last_name,
+                            'spec': user_profile.spec,
+                            'sur_sur_name': user_profile.sur_sur_name,
+                            'vk_url': user_profile.vk_url,
+                            'hh_url': user_profile.hh_url,
+                            'descriptions': user_profile.descriptions,
+                            'behance_url': user_profile.behance_url}
+
+
+        return  super().post(request, args, kwargs)
+
+
+
+
+

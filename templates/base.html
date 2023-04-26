@@ -33,7 +33,6 @@
                 <a href="{% url 'profile' slug=user.slug %}" class ="profile-link">Мой профиль</a>
             {% else %}
                 <a href="{% url 'welcome'%}" class ="profile-link">Мой профиль</a>
-
             {% endif %}
         </div>
     </div>
@@ -48,19 +47,25 @@
 
 <footer class="footer">
         <div class="footer_logo">
-            <img class="footer_logo-img" src="{% static '/images/Logo.png' %}">
+            <a href="{% url 'home' %}" class="footer_logo-img">
+                <img src="{% static 'images/Logo.png' %}" alt="" class="footer_logo-img">
+            </a>
         </div>
         <div class="footer_nav">
-            <a class="nav_link">Главная</a>
+            <a href="{% url 'home' %}" class="nav_link">Главная</a>
             <a class="nav_link">Мои проекты</a>
-            <a class="nav_link">Личный кабинет</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' slug=user.slug %}" class ="nav_link">Личный кабинет</a>
+            {% else %}
+                <a href="{% url 'welcome'%}" class ="nav_link">Личный кабинет</a>
+            {% endif %}
         </div>
         <div class="about-us_container">
             <div class="nav_link about-us_heading">О нас</div>
             <div class="about-us_contacts">
                 <div class="about-us_contacts-left">
                     <a class="about-us_contacts-text" href="/">Команда ОАО ”УЕЛКИ”</a>
-                    <a class="about-us_contacts-text" href="/">Бекэнд-разработчик Катерина </a>
+                    <a class="about-us_contacts-text" href="https://youtu.be/dQw4w9WgXcQ">Бекэнд-разработчик Катерина </a>
                     <a class="about-us_contacts-text" href="/">Фронтенд-разработчик Тимофей </a>
                 </div>
                 <div class="about-us_contacts-right">
@@ -71,6 +76,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>

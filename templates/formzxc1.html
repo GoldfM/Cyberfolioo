@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +6,15 @@
     <title>Вторая часть регистрации</title>
 </head>
 <body>
-<p>{{ Name }}</p>
-<p>{{ SurName }}</p>
-<p>{{ SurSurName }}</p>
-<form action="{% url 'form1' name=Name    surname=SurName     sursurname=SurSurName %}" method="POST">
-    {% csrf_token %}
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
-    {{ form }}
-    <input type="submit" value="Submit">
+
+<form>
+{% csrf_token %}
+{% for field in form %}
+
+      {% render_field field class="form-control" %}
+
+
+{% endfor %}
 </form>
 </body>
 </html>

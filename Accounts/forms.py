@@ -45,4 +45,3 @@ class firstForm(forms.Form):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'input enter-input'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'input enter-input'}))
-
