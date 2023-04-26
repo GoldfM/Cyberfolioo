@@ -90,6 +90,10 @@ class Project(models.Model):
     avatar_image = models.ImageField(upload_to=project_directory_path, blank=True, verbose_name="Аватар")
     main_image = models.ImageField(upload_to=project_directory_path, blank=True, verbose_name="Основное фото")
 
+    def teammates(self):
+        for i in [self.teammate1,self.teammate2,self.teammate3,self.teammate4,self.teammate5]:
+            print(i)
+        return [self.teammate1,self.teammate2,self.teammate3,self.teammate4,self.teammate5]
     def save(self, *args, **kwargs):
         # Slugify (Cyrillic)
         alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z',
@@ -112,10 +116,14 @@ class Project(models.Model):
         return Project.objects.get(slug=self.slug).users.all()
 
     def get_rate_registred(self):
-        return round(self.sum_registred / self.count_registred, 1)
+        if self.count_registred:
+            return round(self.sum_registred / self.count_registred, 1)
+        return 0
 
     def get_rate_unregistred(self):
-        return round(self.sum_unregistred / self.count_unregistred, 1)
+        if self.count_unregistred:
+            return round(self.sum_unregistred / self.count_unregistred, 1)
+        return 0
 
     class Meta:
         verbose_name = 'Проект'

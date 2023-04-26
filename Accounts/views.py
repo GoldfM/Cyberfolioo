@@ -17,6 +17,10 @@ class ProjectView(DetailView):
     template_name = 'project_page.html'
     slug_url_kwarg = 'post_slug'
     context_object_name = 'proj'
+    def get_queryset(self, queryset=None):
+        user = get_object_or_404(User, slug = self.request.path_info.split('/')[2])
+        return user.get_projects()
+
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

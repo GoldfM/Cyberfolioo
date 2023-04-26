@@ -1,9 +1,16 @@
 python manage.py createsuperuser
+
+
+
+
 admin
 admin@admin.com
 1234
 1234
 y
+
+
+
 python manage.py runserver
 
 

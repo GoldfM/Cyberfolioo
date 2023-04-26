@@ -14,7 +14,7 @@
             <div class="hero_info">
                 <h1 class="hero_title">{{proj.name}}</h1>
                 <h2>Основные мысли</h2>
-                <p class="hero-description">{{proj.main_idea}}</p>
+                <p class="hero-description">{{proj.key_words}}</p>
                 <h2 class="hero-review_title">Оценка проекта</h2>
                 <div class="hero_review">
                     <div class="hero-review_item">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="hero_img">
-                <img class="hero_pic" src="{{proj.get_photo}}">
+                <img class="hero_pic" src="{{proj.get_photo.url}}">
             </div>
         </div>
 
@@ -51,7 +51,7 @@
                         Ссылка на скачивание
                     </div>
                     <div class="link_container_right-part">
-                        <a class="description_link" href="{{proj.archive_url}}">Здесь типо ссылка на архив</a>
+                        <a class="description_link" href="{{proj.url}}">Здесь типо ссылка на архив</a>
                     </div>
                 </div>
             </div>
@@ -60,11 +60,11 @@
                 <div class="about-project_category_section">
                     <div class="about-project_category">
                         <div class="about-project_category_header">Специализация</div>
-                        <div class="about-project_category_description">{{proj.spec}}</div>
+                        <div class="about-project_category_description">{{proj.spec_proj}}</div>
                     </div>
                     <div class="about-project_category">
                         <div class="about-project_category_header">Срок разработки</div>
-                        <div class="about-project_category_description">{{proj.dev_period}}</div>
+                        <div class="about-project_category_description">{{proj.time_developing}}</div>
                     </div>
                     <div class="about-project_category">
                         <div class="about-project_category_header">Тип проекта</div>
@@ -73,9 +73,11 @@
                     <div class="about-project_category">
                         <div class="about-project_category_header">Состав участников</div>
                         <div class="about-project_category_description">
-                            {% for m in proj.get_users %}
-                                <a href="{% url 'profile' slug=m.slug %}" class="about-project_category_description_user" >{{m.get_short_name}}</a>
-                            {% endfor %}
+                        {% for teammate in proj.teammates %}
+                            {% if teammate %}
+                                <a href="{{ teammate }}" class="about-project_category_description_user" >{{teammate}}</a>
+                            {% endif %}
+                        {% endfor %}
                         </div>
                     </div>
                 </div>
