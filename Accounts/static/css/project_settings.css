@@ -114,6 +114,7 @@
 
 .center_container_item{
     display: flex;
+    width: 38.4vw;
     justify-content: space-between;
     flex-direction: column;
     margin-right: 2.7vw;
