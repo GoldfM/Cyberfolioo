@@ -121,6 +121,7 @@
 
 .addition{
     display: flex;
+    flex-direction: column;
 }
 
 .user_img{
@@ -153,6 +154,8 @@
     line-height: 1.82vw;
     color: #FF9000;
     margin-left: 0.625vw;
+    border: none;
+    background: none;
 }
 
 /*LINK*/
@@ -169,6 +172,7 @@
     background: #F8F6F8;
     border-radius: 1.09vw;
     padding: 3.125vw 3.95vw 2.81vw 2.70vw;
+    width: 49.2vw;
 }
 
 .photos_title{
@@ -178,6 +182,7 @@
 .photos_add{
     display: flex;
     align-items: center;
+    margin-top: 0.52vw;
 }
 
 .photos_add-text{
@@ -200,7 +205,7 @@
 }
 
 .photos_text{
-    font-family: 'Gordita';
+   font-family: 'Gordita';
     font-style: normal;
     font-weight: 400;
     font-size: 1.66vw;
