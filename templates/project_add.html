@@ -71,17 +71,26 @@
                     <h2 class="settings_title">Участники</h2>
                     <p class='people_text'>Здесь вы можете указать людей, которые вам помогали в разработке проекта, либо были как-либо затронуты
                         (ссылкой на их профиль, либо просто ФИО)</p>
-                    {% render_field form.teammate1 type="text" placeholder="Ссылка на профиль" class="input main_input"%}
-                    {% render_field form.teammate2 type="text" placeholder="Ссылка на профиль" class="input main_input"%}
-                    {% render_field form.teammate3 type="text" placeholder="Ссылка на профиль" class="input main_input"%}
-                    {% render_field form.teammate4 type="text" placeholder="Ссылка на профиль" class="input main_input"%}
-                    {% render_field form.teammate5 type="text" placeholder="Ссылка на профиль" class="input main_input"%}
-
-                    <div>
+                    {% render_field form.teammate1 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% render_field form.teammate2 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% render_field form.teammate3 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% render_field form.teammate4 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% render_field form.teammate5 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    <div class="people_add_button">
                         <img class="user_img" src="{% static '/images/user.png' %}">
-                        <span class="people_add">+Добавить участника</span>
+                        <button type="button" class="people_add">+Добавить участника</button>
                     </div>
-                    
+                <script>
+                    var form = document.querySelectorAll('.profile_input')
+                    var index = 0;
+                    var btn = document.querySelector('.people_add_button')
+                    btn.addEventListener("click", function (e) {
+                      index = index + 1;
+                      for (var i = 0; i < index; i++){
+                        form[i].style.display = ""
+                      }
+                    });
+                </script>
                 </div>
                 <div class="link">
                     <h2 class="settings_title">Ссылка на проект</h2>
