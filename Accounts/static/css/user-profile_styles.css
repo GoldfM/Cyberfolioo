@@ -224,6 +224,8 @@ h3 {
 
 .project-info-aria {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
     flex-direction: column;
     margin-left: 4.427vw;
 }

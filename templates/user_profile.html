@@ -117,8 +117,10 @@
                 {% endif %}
             </div>
             <div class="project-info-aria">
-                <h3 class="project-name">{{ project.name }}</h3>
-                <p class="project-info user-text">{{ project.key_words }}</p>
+                <div>
+                    <h3 class="project-name">{{ project.name }}</h3>
+                    <p class="project-info user-text">{{ project.key_words }}</p>
+                </div>
                 <div class="about-project-section">
                     <a href="{% url 'project' profile_slug=user.slug post_slug=project.slug %}" class="project-link">
                         <h5 class="abour-project">Подробнее</h5>
