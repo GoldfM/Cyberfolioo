@@ -226,14 +226,12 @@ p{
 }
 
 .review_text{
-    width: 80%;
     font-family: 'Gordita';
     font-style: normal;
-    font-weight: 400;
-    font-size: 1.66vw;
-    line-height: 1.82vw;
-    color: #000000;
-    margin-top: 1.30vw;
+    font-weight: 700;
+    font-size: 1.875vw;
+    line-height: 2.03vw;
+    color: #FF9000;
 }
 
 .review-title{
