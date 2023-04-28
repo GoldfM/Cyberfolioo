@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import PermissionDenied
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -80,11 +80,12 @@ class LoginUser(LoginView):
 def welcome(request):
     return render(request, 'welcome.html')
 
-class Home(ListView):
+'''class Home(ListView):
     paginate_by = 6
     model = User
     template_name = "main_page.html"
     context_object_name = "users"
+
 
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,7 +94,32 @@ class Home(ListView):
         return context
 
     #def get_queryset(self):
-        #return User.objects.order_by()
+        #return User.objects.order_by()'''
+
+def home(request):
+    users = User.objects.all()
+
+    if request.method == 'GET':
+        first_name = request.GET.get('first_name')
+        last_name = request.GET.get('last_name')
+        spec = request.GET.get('specialization')
+
+        first_name_q = Q()
+        if first_name:
+            first_name_q = Q(first_name__icontains=first_name)
+
+        last_name_q = Q()
+        if last_name:
+            last_name_q = Q(last_name__icontains=last_name)
+
+        spec_q = Q()
+        if spec:
+            spec_q = Q(spec__icontains=spec)
+
+        users = users.filter(first_name_q & last_name_q & spec_q)
+
+    users = users.annotate(num_followers=Count('follower')).order_by('-num_followers')
+    return render(request, 'main_page.html', {'users': users})
 
 
 class PostDoesNotExist:

@@ -16,24 +16,22 @@
             <div class="search_header">
                 Давайте вдохновимся
             </div>
-            <a href="/">Переход к проектам</a>
-            <div class="search_info">
-                <div class="search_form">
-                    <div class="input-heading">Имя</div>
-                    <input required type="text" name="first-name" placeholder="Иван" class="input search_input">
-                    <div class="input-heading">Фамилия</div>
-                    <input required type="text" name="last-name" placeholder="Иванов" class="input search_input">
-                    <div class="input-heading">Специализация</div>
-                    <input required type="text" name="specialization" placeholder="Указать род деятельности" class="input search_input">
-                    <div class="search_button-container">
-                        <input type="submit" value="Поиск" class="usual-button search_button">
-                    </div>
-                </div>
+            <form method="get" action="{% url 'home' %}">
+                <div class="input-heading">Имя</div>
+                <input type="text" name="first_name" id="first_name" value="{{ request.GET.first_name }}" placeholder="Иван" class="input search_input">
+                <div class="input-heading">Фамилия</div>
+                <input type="text" name="last_name" id="last_name" value="{{ request.GET.last_name }}" placeholder="Иванов" class="input search_input">
+                <div class="input-heading">Специализация</div>
+                <input type="text" name="specialization" id="specialization" value="{{ request.GET.specialization }}" placeholder="Указать род деятельности" class="input search_input">
+                <button type="submit">Поиск</button>
+                <!--<div class="search_button-container">
+                <input type="submit" value="Поиск" class="usual-button search_button">-->
+            </form>
+            </div>
                 <div>
                     <img class="search_img" src="{% static 'images/mainpage_img.png' %}">
                 </div>
             </div>
-        </div>
 
 {% for u in users %}
     <div class="user-card-container">
