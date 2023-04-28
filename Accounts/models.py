@@ -49,19 +49,19 @@ class User(AbstractUser):
         return Project.objects.all().filter(users=self)
 
     def count_projects(self):
-        return len(self.get_projects())
+        return self.get_projects().count()
 
     def get_followers(self):
         return Follow.objects.all().filter(follow_to_id=self.id)
 
     def count_followers(self):
-        return len(self.get_followers())
+        return self.get_followers().count()
 
     def get_followings(self):
         return Follow.objects.all().filter(follow_from_id=self.id)
 
     def count_followings(self):
-        return len(self.get_followings())
+        return self.get_followings().count()
 
     def get_absolute_url(self):
         return reverse('profile', kwargs={'slug': self.slug})

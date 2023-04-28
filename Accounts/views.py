@@ -80,12 +80,11 @@ class LoginUser(LoginView):
 def welcome(request):
     return render(request, 'welcome.html')
 
-'''class Home(ListView):
+class Home(ListView):
     paginate_by = 6
     model = User
     template_name = "main_page.html"
     context_object_name = "users"
-
 
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,34 +92,33 @@ def welcome(request):
         #c_def = self.get_user_context(title = "Главная страница")
         return context
 
-    #def get_queryset(self):
-        #return User.objects.order_by()'''
+    def get_queryset(self):
+        users = User.objects.all()
 
-def home(request):
-    users = User.objects.all()
+        if self.request.method == 'GET':
+            first_name = self.request.GET.get('first_name')
+            last_name = self.request.GET.get('last_name')
+            spec = self.request.GET.get('specialization')
 
-    if request.method == 'GET':
-        first_name = request.GET.get('first_name')
-        last_name = request.GET.get('last_name')
-        spec = request.GET.get('specialization')
+            first_name_q = Q()
+            if first_name:
+                first_name_q = Q(first_name__icontains=first_name)
 
-        first_name_q = Q()
-        if first_name:
-            first_name_q = Q(first_name__icontains=first_name)
+            last_name_q = Q()
+            if last_name:
+                last_name_q = Q(last_name__icontains=last_name)
 
-        last_name_q = Q()
-        if last_name:
-            last_name_q = Q(last_name__icontains=last_name)
+            if spec:
+                try:
+                    spec_obj = Specs.objects.get(name=spec)
+                    users = users.filter(spec=spec_obj)
+                except Specs.DoesNotExist:
+                    pass
 
-        spec_q = Q()
-        if spec:
-            spec_q = Q(spec__icontains=spec)
+            users = users.filter(first_name_q & last_name_q)
 
-        users = users.filter(first_name_q & last_name_q & spec_q)
-
-    users = users.annotate(num_followers=Count('follower')).order_by('-num_followers')
-    return render(request, 'main_page.html', {'users': users})
-
+        users = users.annotate(num_followers=Count('following')).order_by('-num_followers')
+        return users
 
 class PostDoesNotExist:
     pass

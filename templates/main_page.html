@@ -9,41 +9,39 @@
 {% endblock %}
 
 {% block content %}
-
-
-
 <div class="search_container">
             <div class="search_header">
                 Давайте вдохновимся
             </div>
-            <form method="get" action="{% url 'home' %}">
-                <div class="input-heading">Имя</div>
-                <input type="text" name="first_name" id="first_name" value="{{ request.GET.first_name }}" placeholder="Иван" class="input search_input">
-                <div class="input-heading">Фамилия</div>
-                <input type="text" name="last_name" id="last_name" value="{{ request.GET.last_name }}" placeholder="Иванов" class="input search_input">
-                <div class="input-heading">Специализация</div>
-                <input type="text" name="specialization" id="specialization" value="{{ request.GET.specialization }}" placeholder="Указать род деятельности" class="input search_input">
-                <button type="submit">Поиск</button>
-                <!--<div class="search_button-container">
-                <input type="submit" value="Поиск" class="usual-button search_button">-->
-            </form>
-            </div>
+            <div class="search_info">
+                <form method="get" action="{% url 'home' %}">
+                    <div class="input-heading">Имя</div>
+                    <input type="text" name="first_name" id="first_name" value="{{ request.GET.first_name }}" placeholder="Иван" class="input search_input">
+                    <div class="input-heading">Фамилия</div>
+                    <input type="text" name="last_name" id="last_name" value="{{ request.GET.last_name }}" placeholder="Иванов" class="input search_input">
+                    <div class="input-heading">Специализация</div>
+                    <input type="text" name="specialization" id="specialization" value="{{ request.GET.specialization }}" placeholder="Указать род деятельности" class="input search_input">
+                    <div class="search_button-container">
+                        <button type="submit" class="usual-button search_button">Поиск</button>
+                    </div>
+                </form>
                 <div>
                     <img class="search_img" src="{% static 'images/mainpage_img.png' %}">
                 </div>
             </div>
+</div>
 
 {% for u in users %}
     <div class="user-card-container">
             <div class="left-section card-container">
                 <div class="user-header">{{ u.get_short_name }}</div>
-                <p class="user-text">{{ user.descriptions }}</p>
+                <p class="user-text">{{ u.descriptions }}</p>
                 <div class="user-statistic-header">Статистика</div>
                 <div class="statistic-container">
                     <ul class="statistic-list">
-                        <li class="statistic-item">{{ user.count_projects }} проекта</li>
-                        <li class="statistic-item">{{ user.count_followers }} подписок</li>
-                        <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
+                        <li class="statistic-item">{{ u.count_projects }} проекта(ов)</li>
+                        <li class="statistic-item">{{ u.count_followers }} подписок</li>
+                        <li class="statistic-item">{{ u.count_followings }} подписчиков</li>
                     </ul>
                     <a class="project-link">
                         <h5 class="abour-project">Подробнее</h5>
@@ -61,5 +59,4 @@
             </div>
         </div>
 {% endfor %}
-
 {% endblock %}
