@@ -41,7 +41,7 @@ class User(AbstractUser):
     def get_projects(self):
         return Project.objects.all().filter(user_id=self.id)
     def count_projects(self):
-        return len(self.get_projects())
+        return self.get_projects().count()
 
     def get_followers(self):
         return Follow.objects.all().filter(follow_to_id=self.id)

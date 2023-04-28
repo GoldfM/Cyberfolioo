@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import PermissionDenied
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -111,9 +111,33 @@ class Home(ListView):
         #c_def = self.get_user_context(title = "Главная страница")
         return context
 
-    #def get_queryset(self):
-        #return User.objects.order_by()
+    def get_queryset(self):
+        users = User.objects.all()
 
+        if self.request.method == 'GET':
+            first_name = self.request.GET.get('first_name')
+            last_name = self.request.GET.get('last_name')
+            spec = self.request.GET.get('specialization')
+
+            first_name_q = Q()
+            if first_name:
+                first_name_q = Q(first_name__icontains=first_name)
+
+            last_name_q = Q()
+            if last_name:
+                last_name_q = Q(last_name__icontains=last_name)
+
+            if spec:
+                try:
+                    spec_obj = Specs.objects.get(name=spec)
+                    users = users.filter(spec=spec_obj)
+                except Specs.DoesNotExist:
+                    pass
+
+            users = users.filter(first_name_q & last_name_q)
+
+        users = users.annotate(num_followers=Count('following')).order_by('-num_followers')
+        return users
 
 class PostDoesNotExist:
     pass
