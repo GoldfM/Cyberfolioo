@@ -55,9 +55,7 @@ class addProject(CreateView):
               'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
 
     def form_valid(self, form):
-        print(form.cleaned_data)
         form.instance.user = self.request.user
-        print(self.request.user)
         return super(addProject, self).form_valid(form)
 
 
