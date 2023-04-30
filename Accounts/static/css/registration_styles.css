@@ -53,6 +53,7 @@ html, body {
     width: 32.44vw;
     height: 4.895vw;
     border: 4px solid #090E2B;
+    color: #000000;
 }
 
 .enter-input:not(:last-child) {
