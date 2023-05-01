@@ -8,7 +8,11 @@ from django.db.models import Count, Q
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views import View
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from scipy.constants import slug
+
 from Accounts.forms import *
 from Accounts.models import *
 
@@ -74,7 +78,9 @@ def wtfForm1(request, name,surname, sursurname):
             a = User(first_name=name,last_name=surname,sur_sur_name=sursurname,username=username)
             a.set_password(pass1)
             a.save()
-            return redirect('/')
+            new_user = authenticate(username=username, password=pass1)
+            login(request, new_user)
+            return redirect('home')
         else:
             return render(request, 'registration2.html',
                           {'form': form, 'Name': name, 'SurName': surname, 'SurSurName': sursurname})
@@ -98,7 +104,7 @@ def welcome(request):
     return render(request, 'welcome.html')
 
 class Home(ListView):
-    paginate_by = 6
+    #paginate_by = 6
     model = User
     template_name = "main_page.html"
     context_object_name = "users"
@@ -106,11 +112,10 @@ class Home(ListView):
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Главная страница"
-        #c_def = self.get_user_context(title = "Главная страница")
         return context
 
     def get_queryset(self):
-        users = User.objects.all()
+        users = User.objects.all().exclude(id=self.request.user.id).filter(is_superuser=0)
 
         if self.request.method == 'GET':
             first_name = self.request.GET.get('first_name')
@@ -136,6 +141,45 @@ class Home(ListView):
 
         users = users.annotate(num_followers=Count('following')).order_by('-num_followers')
         return users
+
+    def post(self, request):
+        profile_id = request.POST.get('user_id')
+        profile = User.objects.get(id=profile_id)
+        if request.user in profile.following.all():
+            Follow.objects.filter(follow_from=request.user, follow_to=profile).delete()
+        else:
+            Follow.objects.create(follow_from=request.user, follow_to=profile)
+        return redirect('home')
+
+class SubscribeView(View):
+    def post(self, request):
+        profile_id = request.POST.get('user_id')
+        profile = User.objects.get(id=profile_id)
+        if not request.user.is_authenticated:
+            return redirect('login')
+
+        if request.user == profile:
+            return redirect('home')
+
+        if not Follow.objects.filter(follow_from=request.user, follow_to=profile).exists():
+            Follow.objects.create(follow_from=request.user, follow_to=profile)
+
+        return redirect('home')
+
+class UnsubscribeView(View):
+    def post(self, request):
+        profile_id = request.POST.get('user_id')
+        profile = User.objects.get(id=profile_id)
+        if not request.user.is_authenticated:
+            return redirect('login')
+
+        if request.user == profile:
+            return redirect('home')
+
+        Follow.objects.filter(follow_from=request.user, follow_to=profile).delete()
+
+        return redirect('home')
+
 
 class PostDoesNotExist:
     pass
@@ -163,12 +207,12 @@ class Profile(DetailView):
                 # Пользователь открывает свой профиль
 
           # Пользователь открывает профиль другого пользователя
-        return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': is_your_profile, 'projects':user_profile.get_projects()})
+        return render(request, 'user_profile.html', {'user': user_profile, 'is_your_profile': is_your_profile, 'projects':user_profile.get_projects(), 'title': slug})
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['projects'] = Project.objects.all()
-        return context
+    #def get_context_data(self, *, object_list=None, **kwargs):
+        #context = super().get_context_data(**kwargs)
+        #context['title'] = "Профиль"
+        #return context
 
 class ProfileUpdateView(UpdateView):
     model = User

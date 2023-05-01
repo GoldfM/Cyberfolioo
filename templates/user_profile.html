@@ -98,8 +98,9 @@
         </div>
     </div>
     <div class="container second-container">
+        {% if user.count_projects > 0 and is_your_profile %}
         <h1 class="projects-header">Проекты</h1>
-
+        {% endif %}
         {% if is_your_profile %}
         <div class="add-project-aria">
             <img class="add-project-icon" src="{% static 'images/add-project-icon.png' %}">

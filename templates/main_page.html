@@ -30,6 +30,7 @@
                 </div>
             </div>
         </div>
+
 <div class="users">
 {% for u in users %}
     <div class="user-card-container">
@@ -47,21 +48,35 @@
                         <h5 class="abour-project">Подробнее</h5>
                         <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
                     </a>
-                    {% if not is_your_profile %}
-                    <div class="second-colum">
-                        <button class="usual-button submit-button subscribe" data-subscribe="no">Подписаться</button>
-                    </div>
+                {% if user.is_authenticated and not is_your_profile %}
+                    {% if user.id in u.get_followings %}
+                        <form action="{% url 'subscribe' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ u.id }}">
+                        <button class="usual-button submit-button subscribe" type="submit">Подписаться</button>
+                        </form>
+
+                    {% else %}
+                        <form action="{% url 'unsubscribe' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ u.id }}">
+                        <button class="usual-button submit-button unsubscribe" type="submit">Отписаться</button>
+                        </form>
                     {% endif %}
+
+                {% endif %}
+                    </div>
                 </div>
             </div>
             <div class="right-section card-container">
                 {% if u.photo %}
-                <img src="{{ u.photo.url }}" alt="" class="avatar">
+                    <img src="{{u.photo.url}}" alt="" class="avatar">
                 {% endif %}
             </div>
         </div>
 {% endfor %}
 </div>
+
 <script>
     document.querySelector('.users').addEventListener('click', event => {
     if (event.target.classList.contains('subscribe')){

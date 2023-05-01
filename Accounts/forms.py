@@ -43,5 +43,5 @@ class firstForm(forms.Form):
     surSurName = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'input enter-input','placeholder':'Отчество (при наличии)'}))
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'input enter-input'}))
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'input enter-input'}))
+    username = forms.CharField(label="Логин", widget=forms.TextInput(attrs={'class': 'input enter-input', 'placeholder':'Логин'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'input enter-input', 'placeholder':'Пароль'}))
