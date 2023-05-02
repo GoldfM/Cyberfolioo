@@ -44,16 +44,16 @@ class User(AbstractUser):
         return self.get_projects().count()
 
     def get_followers(self):
-        return Follow.objects.all().filter(follow_from_id=self.id)
+        return Follow.objects.all().filter(follow_from_id=self.id).values_list('follow_to', flat=True)
 
     def count_followers(self):
         return self.get_followers().count()
 
     def get_followings(self):
-        return Follow.objects.all().filter(follow_to_id=self.id).values('id')
+        return Follow.objects.all().filter(follow_to_id=self.id).values_list('follow_from', flat=True)
 
     def count_followings(self):
-        return self.get_followings().count()
+        return Follow.objects.all().filter(follow_to_id=self.id).count()
 
     def get_absolute_url(self):
         return reverse('profile', kwargs={'slug': self.slug})

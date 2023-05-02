@@ -14,7 +14,7 @@
                 Давайте вдохновимся
             </div>
             <div class="search_info">
-                <form method="get" action="{% url 'home' %}">
+                <form method="GET" action="{% url 'home' %}">
                     <div class="input-heading">Имя</div>
                     <input type="text" name="first_name" id="first_name" value="{{ request.GET.first_name }}" placeholder="Иван" class="input search_input">
                     <div class="input-heading">Фамилия</div>
@@ -49,7 +49,7 @@
                         <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
                     </a>
                 {% if user.is_authenticated and not is_your_profile %}
-                    {% if user.id in u.get_followings %}
+                    {% if request.user.id not in u.get_followings %}
                         <form action="{% url 'subscribe' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="user_id" value="{{ u.id }}">
@@ -77,7 +77,7 @@
 {% endfor %}
 </div>
 
-<script>
+<!--<script>
     document.querySelector('.users').addEventListener('click', event => {
     if (event.target.classList.contains('subscribe')){
         event.target.innerHTML = "Отписаться";
@@ -92,5 +92,6 @@
         event.target.dataset.subscribe = 'no';
     }
 });
-</script>
+</script>-->
+<script src="{% static 'js/scroll.js' %}"></script>
 {% endblock %}

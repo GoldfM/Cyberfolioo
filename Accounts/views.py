@@ -90,8 +90,6 @@ class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'enter-page.html'
 
-
-
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
         #c_def = self.get_user_context(title="Авторизация")
@@ -142,14 +140,6 @@ class Home(ListView):
         users = users.annotate(num_followers=Count('following')).order_by('-num_followers')
         return users
 
-    def post(self, request):
-        profile_id = request.POST.get('user_id')
-        profile = User.objects.get(id=profile_id)
-        if request.user in profile.following.all():
-            Follow.objects.filter(follow_from=request.user, follow_to=profile).delete()
-        else:
-            Follow.objects.create(follow_from=request.user, follow_to=profile)
-        return redirect('home')
 
 class SubscribeView(View):
     def post(self, request):
