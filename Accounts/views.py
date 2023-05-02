@@ -144,31 +144,33 @@ class Home(ListView):
 class SubscribeView(View):
     def post(self, request):
         profile_id = request.POST.get('user_id')
+        redirect_url = request.POST.get('redirect_url')
         profile = User.objects.get(id=profile_id)
         if not request.user.is_authenticated:
             return redirect('login')
 
         if request.user == profile:
-            return redirect('home')
+            return redirect(redirect_url)
 
         if not Follow.objects.filter(follow_from=request.user, follow_to=profile).exists():
             Follow.objects.create(follow_from=request.user, follow_to=profile)
 
-        return redirect('home')
+        return redirect(redirect_url)
 
 class UnsubscribeView(View):
     def post(self, request):
         profile_id = request.POST.get('user_id')
+        redirect_url = request.POST.get('redirect_url')
         profile = User.objects.get(id=profile_id)
         if not request.user.is_authenticated:
             return redirect('login')
 
         if request.user == profile:
-            return redirect('home')
+            return redirect(redirect_url)
 
         Follow.objects.filter(follow_from=request.user, follow_to=profile).delete()
 
-        return redirect('home')
+        return redirect(redirect_url)
 
 
 class PostDoesNotExist:

@@ -24,14 +24,14 @@
         <nav class="nav">
             <ul class="nav-list">
                 <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Главная</a></li>
-                {% if user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                 <li class="nav-item"><a href="" class="nav-link"></a>Мои подписки</li>
                 {% endif %}
             </ul>
         </nav>
         <div class="user-container">
             <img src="{% static 'images/user-icon.png' %}" alt="" class = "user-icon">
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
                 <a href="{% url 'profile' slug=request.user.slug %}" class ="profile-link">Мой профиль</a>
             {% else %}
                 <a href="{% url 'welcome'%}" class ="profile-link">Войти | Зарегистрироваться</a>
@@ -55,7 +55,7 @@
         </div>
         <div class="footer_nav">
             <a href="{% url 'home' %}" class="nav_link">Главная</a>
-            {% if user.is_authenticated %}
+            {% if request.user.is_authenticated %}
             <a class="nav_link">Мои проекты</a>
             {% endif %}
             {% if user.is_authenticated %}

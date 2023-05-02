@@ -40,7 +40,7 @@
                 <div class="user-statistic-header">Статистика</div>
                 <div class="statistic-container">
                     <ul class="statistic-list">
-                        <li class="statistic-item">{{ u.count_projects }} проекта</li>
+                        <li class="statistic-item">{{ u.count_projects }} проекта(ов)</li>
                         <li class="statistic-item">{{ u.count_followers }} подписок</li>
                         <li class="statistic-item">{{ u.count_followings }} подписчиков</li>
                     </ul>
@@ -53,6 +53,7 @@
                         <form action="{% url 'subscribe' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="user_id" value="{{ u.id }}">
+                        <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                         <button class="usual-button submit-button subscribe" type="submit">Подписаться</button>
                         </form>
 
@@ -60,10 +61,10 @@
                         <form action="{% url 'unsubscribe' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="user_id" value="{{ u.id }}">
+                        <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                         <button class="usual-button submit-button unsubscribe" type="submit">Отписаться</button>
                         </form>
                     {% endif %}
-
                 {% endif %}
                     </div>
                 </div>

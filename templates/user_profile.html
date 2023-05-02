@@ -24,27 +24,27 @@
                             <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
                         </ul>
                     </div>
-                    {% if not is_your_profile %}
+
+                    {% if request.user.is_authenticated and not is_your_profile %}
                     <div class="second-colum">
-                        <button class="usual-button submit-button subscribe" data-subscribe="no">Подписаться</button>
-                        <script>
-                            document.querySelector('.submit-button').addEventListener('click', event => {
-                            if (event.target.classList.contains('subscribe')){
-                                event.target.innerHTML = "Отписаться";
-                                event.target.classList.remove('subscribe');
-                                event.target.classList.add('unsubscribe');
-                                event.target.dataset.subscribe = 'yes';
-                              }
-                            else if(event.target.classList.contains('unsubscribe')){
-                                event.target.innerHTML = "Подписаться";
-                                event.target.classList.remove('unsubscribe');
-                                event.target.classList.add('subscribe');
-                                event.target.dataset.subscribe = 'no';
-                              }
-                            });
-                        </script>
-                    </div>
+                        {% if request.user.id not in user.get_followings %}
+                            <form action="{% url 'subscribe' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                            <button class="usual-button submit-button subscribe" type="submit">Подписаться</button>
+                            </form>
+
+                        {% else %}
+                            <form action="{% url 'unsubscribe' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                            <button class="usual-button submit-button unsubscribe" type="submit">Отписаться</button>
+                            </form>
+                        {% endif %}
                     {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
