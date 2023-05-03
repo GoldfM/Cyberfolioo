@@ -176,7 +176,10 @@
                             temp.dataset.value = index;
                         });
                     </script>
+                <form action="{% url 'rateProject' %}" method="post">
+                {% csrf_token %}
                 <input id="formforkatya" type="hidden" name="score" value="0">
+                <input type="hidden" name="project_id" value="{{ proj.id }}">
                 <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
                 <button onclick="setValue();" type="submit" class="review_button">Оставить отзыв</button>
                 <script>
@@ -187,6 +190,7 @@
                       console.log(form.value)
                     }
                 </script>
+                </form>
             </div>
             <div class="review_item">
                 <img src="{% static 'images/review_img.png' %}">

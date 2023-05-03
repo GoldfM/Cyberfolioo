@@ -252,4 +252,32 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+class DeleteProject(View):
+    def post(self, request):
+        project_id = request.POST.get('project_id')
+        redirect_url = request.POST.get('redirect_url')
 
+        if Project.objects.filter(id=project_id).exists():
+            Project.objects.filter(id=project_id).delete()
+
+        return redirect(redirect_url)
+
+
+class RateProject(View):
+    def post(self, request):
+        project_id = request.POST.get('project_id')
+        redirect_url = request.POST.get('redirect_url')
+        score = request.POST.get('score')
+        project = Project.objects.get(id=project_id)
+
+        if request.user.is_authenticated:
+            project.count_registred += 1
+            project.sum_registred += int(score)
+            project.save()
+
+        else:
+            project.count_unregistred += 1
+            project.sum_unregistred += int(score)
+            project.save()
+
+        return redirect(redirect_url)
