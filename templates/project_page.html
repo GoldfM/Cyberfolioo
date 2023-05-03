@@ -141,7 +141,7 @@
         <div class="review">
             <div class="review_item">
                 <h1 class="review-title">Оценить проект</h1>
-                    <div class="rating">
+                    <div class="rating" data-value="0">
                         <svg xmlns="http://www.w3.org/2000/svg" width="3.07vw" height="2.96vw" viewBox="0 0 59 57" fill="none">
                             <path class="star" data-value="1" d="M26.6467 2.78096C27.5448 0.0170212 31.455 0.0170281 32.3531 2.78096L37.2456 17.8387C37.6473 19.0748 38.7991 19.9117 40.0988 19.9117H55.9315C58.8376 19.9117 60.046 23.6305 57.6948 25.3387L44.8859 34.6449C43.8345 35.4089 43.3945 36.763 43.7961 37.999L48.6887 53.0568C49.5867 55.8207 46.4233 58.1191 44.0722 56.4109L31.2633 47.1047C30.2118 46.3407 28.788 46.3407 27.7365 47.1047L14.9276 56.4109C12.5765 58.1191 9.41311 55.8207 10.3111 53.0568L15.2037 37.999C15.6053 36.763 15.1653 35.4089 14.1139 34.6449L1.30501 25.3387C-1.04613 23.6305 0.162206 19.9117 3.06837 19.9117H18.901C20.2007 19.9117 21.3525 19.0748 21.7542 17.8387L26.6467 2.78096Z" fill="#FF9000"/>
                         </svg>
@@ -159,6 +159,7 @@
                         </svg>
                     </div>
                     <script type="text/javascript">
+                        var temp = document.querySelector('.rating')
                         var stars = document.querySelectorAll('.star')
                         document.addEventListener("click", function (e) {
                             var index = e.target.dataset.value;
@@ -172,9 +173,20 @@
                                     stars[i].classList.add('active')
                                 }
                             }
+                            temp.dataset.value = index;
                         });
                     </script>
-                <button type="submit" class="review_button">Оставить отзыв</button>
+                <input id="formforkatya" type="hidden" name="score" value="0">
+                <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                <button onclick="setValue();" type="submit" class="review_button">Оставить отзыв</button>
+                <script>
+                    function setValue() {
+                      var form = document.getElementById("formforkatya");
+                      var need = document.querySelector('.rating');
+                      form.value = need.dataset.value;
+                      console.log(form.value)
+                    }
+                </script>
             </div>
             <div class="review_item">
                 <img src="{% static 'images/review_img.png' %}">
