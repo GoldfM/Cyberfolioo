@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/general_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my-subscriptions.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+    <link href = "{% static 'fonts/stylesheet.css' %}" rel = "stylesheet" type = "text/css" />
+{% endblock %}
+
+{% block content %}
+        <div class="my-subscriptions-container card-container">
+            <h1 class="my-subscriptions-header">Мои подписки</h1>
+        </div>
+        {% for user in users %}
+        <div class="user-card-container {% cycle '' 'another-user-card'%}">
+            <div class="left-section card-container">
+                <div class="user-header">{{ user.get_short_name }}</div>
+                <p class="user-text">{{ user.descriptions }}</p>
+                <div class="user-statistic-header">Статистика</div>
+                <div class="statistic-container">
+                    <ul class="statistic-list">
+                        <li class="statistic-item">{{ user.count_projects }} проекта</li>
+                        <li class="statistic-item">{{ user.count_followers }} подписок</li>
+                        <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
+                    </ul>
+                    <a href="{% url 'profile' slug=user.slug %}" class="project-link">
+                        <h5 class="abour-project">Подробнее</h5>
+                        <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
+                    </a>
+                    <div class="second-colum">
+                        <form action="{% url 'unsubscribe' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
+                            <button class="usual-button submit-button unsubscribe" type="submit">Отписаться</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="right-section card-container">
+                <img src="{% static 'images/user-image.png' %}" alt="" class="avatar">
+            </div>
+        </div>
+        {% endfor %}
+    {% endblock %}
