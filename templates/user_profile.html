@@ -11,17 +11,17 @@
 {% block content %}
     <div class="container user-info-container">
         <div class="left-user-section">
-            <h1 class="user-header">{{ user.first_name }} {{ user.last_name }}</h1>
-            <p class="user-info user-text">{{ user.descriptions }}</p>
+            <h1 class="user-header">{{ cur_user.first_name }} {{ cur_user.last_name }}</h1>
+            <p class="user-info user-text">{{ cur_user.descriptions }}</p>
             <div class="user-statistic-container">
                 
                 <div class="user-statistic">
                     <div class="first-colum">
                         <h3 class="user-statistic-header">Статистика</h3>
                         <ul class="statistic-list">
-                            <li class="statistic-item">{{ user.count_projects }} проектов</li>
-                            <li class="statistic-item">{{ user.count_followers }} подписок</li>
-                            <li class="statistic-item">{{ user.count_followings }} подписчиков</li>
+                            <li class="statistic-item">{{ cur_user.count_projects }} проектов</li>
+                            <li class="statistic-item">{{ cur_user.count_followers }} подписок</li>
+                            <li class="statistic-item">{{ cur_user.count_followings }} подписчиков</li>
                         </ul>
                     </div>
                     {% if not is_your_profile %}
@@ -51,31 +51,31 @@
         <div class="right-user-section">
             <div class="personal-user-info">
                 <h4 class="personal-header">Имя Фамилия</h4>
-                <p class="personal-item">{{ user.first_name }}</p>
-                <p class="personal-item">{{ user.last_name}} </p>
-            <p class="personal-item">{{user.sur_sur_name}} </p>
+                <p class="personal-item">{{ cur_user.first_name }}</p>
+                <p class="personal-item">{{ cur_user.last_name}} </p>
+            <p class="personal-item">{{cur_user.sur_sur_name}} </p>
                 <h4 class="personal-header">Специализация</h4>
-                <p class="personal-item">{{ user.spec }}</p>
+                <p class="personal-item">{{ cur_user.spec }}</p>
                 <ul class="user-contacts">
-                    {% if user.vk_url %}
+                    {% if cur_user.vk_url %}
                     <li class="contact-item">
-                        <a href="{{ user.vk_url }}" class="contact">
+                        <a href="{{ cur_user.vk_url }}" class="contact">
                             <img src="{% static 'images/vk-icon.svg' %}" alt="" class="contact-img">
                         </a>
                     </li>
                     {% endif %}
-                    {% if user.hh_url %}
+                    {% if cur_user.hh_url %}
 
                     <li class="contact-item">
-                        <a href="{{ user.hh_url }}" class="contact">
+                        <a href="{{ cur_user.hh_url }}" class="contact">
                             <img src="{% static '/images/hh.svg' %}" alt="" class="contact-img">
                         </a>
                     </li>
                     {% endif %}
 
-                    {% if user.behance_url %}
+                    {% if cur_user.behance_url %}
                     <li class="contact-item">
-                        <a href="{{ user.behance_url }}" class="contact">
+                        <a href="{{ cur_user.behance_url }}" class="contact">
                             <img src="{% static '/images/phone.svg' %}" alt="" class="contact-img">
                         </a>
                     </li>
@@ -83,8 +83,8 @@
                 </ul>
             </div>
             <div class="user-avatar">
-                {% if user.photo %}
-                    <img src="{{user.photo.url}}" alt="" class="avatar">
+                {% if cur_user.photo %}
+                    <img src="{{cur_user.photo.url}}" alt="" class="avatar">
                 {% else %}
                     <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
                 {% endif %}
@@ -122,7 +122,7 @@
                     <p class="project-info user-text">{{ project.key_words }}</p>
                 </div>
                 <div class="about-project-section">
-                    <a href="{% url 'project' profile_slug=user.slug post_slug=project.slug %}" class="project-link">
+                    <a href="{% url 'project' profile_slug=cur_user.slug post_slug=project.slug %}" class="project-link">
                         <h5 class="abour-project">Подробнее</h5>
                         <img class="abour-project-icon" src="{% static 'images/about-project-icon.svg' %}">
                     </a>
