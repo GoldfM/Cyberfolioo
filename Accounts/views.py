@@ -16,6 +16,22 @@ from scipy.constants import slug
 from Accounts.forms import *
 from Accounts.models import *
 
+
+
+class MySubscribtions(ListView):
+    model = User
+    template_name = 'my-subscriptions.html'
+    context_object_name = 'users'
+
+    def get_queryset(self):
+        cur_user = self.request.user.id
+        follow_to = Follow.objects.filter(follow_from=cur_user)
+        pks = follow_to.values_list('follow_to', flat=True)
+        print(pks)
+
+        return User.objects.filter(pk__in = pks)
+
+
 class ProjectView(DetailView):
     model = Project
     template_name = 'project_page.html'
@@ -182,12 +198,6 @@ class Profile(DetailView):
     template_name = 'user_profile.html'
     context_object_name = 'user'
 
-    '''def get_object(self, queryset=None):
-        slug = self.kwargs.get(self.slug_url_kwarg, None)
-        try:
-            return queryset.get(slug=slug)
-        except PostDoesNotExist:
-            raise Http404('Ох, нет объекта;)')'''
     def get(self, request, *args, **kwargs):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
         user_profile = get_object_or_404(User,slug=slug)

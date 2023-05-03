@@ -34,6 +34,7 @@ urlpatterns = [
     path('profile/<slug:slug>/edit', ProfileUpdateView.as_view(), name='editProfile'),
     path('subscribe/', SubscribeView.as_view(), name='subscribe'),
     path('unsubscribe/', UnsubscribeView.as_view(), name='unsubscribe'),
+    path('my-subscriptions', MySubscribtions.as_view(), name='subscriptions'),
 ]
 urlpatterns += static(settings.MEDIA_URL,
                               document_root=settings.MEDIA_ROOT)

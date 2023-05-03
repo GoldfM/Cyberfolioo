@@ -43,8 +43,9 @@
                             <button class="usual-button submit-button unsubscribe" type="submit">Отписаться</button>
                             </form>
                         {% endif %}
-                    {% endif %}
                     </div>
+
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -53,7 +54,7 @@
                 <h4 class="personal-header">Имя Фамилия</h4>
                 <p class="personal-item">{{ user.first_name }}</p>
                 <p class="personal-item">{{ user.last_name}} </p>
-            <p class="personal-item">{{user.sur_sur_name}} </p>
+                <p class="personal-item">{{user.sur_sur_name}} </p>
                 <h4 class="personal-header">Специализация</h4>
                 <p class="personal-item">{{ user.spec }}</p>
                 <ul class="user-contacts">
