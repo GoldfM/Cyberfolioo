@@ -55,6 +55,7 @@ html {
   font-weight: 400;
   font-size: 1.6667vw;
   line-height: 1.8229vw;
+  overflow-wrap: break-word;
 }
 
 .statistic-item:not(:last-child) {

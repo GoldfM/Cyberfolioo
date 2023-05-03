@@ -7,7 +7,7 @@ html {
 .user-info-container {
     display: flex;
     /* width: 96.25vw; */
-    height: 32.9167vw;
+    /*height: 32.9167vw;*/
     background-color: #F8F6F8;
     padding-bottom: 2.5vw;
     padding-top: 2.396vw;
@@ -77,7 +77,6 @@ button {
     
 }
 
-
 .user-statistic-header {
     display: inline;
     font-weight: 700;
@@ -85,7 +84,7 @@ button {
     line-height: 1.8229vw;
     color: #FF9000;
     margin-bottom: 0.78125vw;
-    margin-top: 0px;
+    margin-top: 1.40vw;
     padding: 0px;
 }
 
@@ -224,10 +223,11 @@ h3 {
 
 .project-info-aria {
     display: flex;
-    width: 100%;
+    width: 60.1vw;
     justify-content: space-between;
     flex-direction: column;
     margin-left: 4.427vw;
+    overflow-wrap: break-word;
 }
 
 .project-name {
@@ -240,6 +240,7 @@ h3 {
 
 .project-info {
     margin-top: 0px !important;
+    overflow-wrap: break-word;
 }
 
 .project-link {

@@ -43,6 +43,7 @@ p{
     color: #F8F6F8;
     margin-top: 0.41vw;
     margin-bottom: 1.45vw;
+    overflow-wrap: break-word;
 }
 
 .hero_info{
@@ -67,6 +68,7 @@ p{
     font-weight: 400;
     font-size: 1.66vw;
     line-height: 1.82vw;
+    overflow-wrap: break-word;
     color: #F8F6F8;
 }
 
@@ -96,6 +98,7 @@ p{
     background: #F8F6F8;
     border-radius: 1.09vw;
     padding: 3.17vw 3.64vw 2.08vw 3.64vw;
+    overflow-wrap: break-word;
 }
 
 .about-project{
@@ -117,6 +120,7 @@ p{
     line-height: 1.82vw;
     color: #000000;
     margin-bottom: 1.71vw;
+    overflow-wrap: break-word;
 }
 
 .link_container_left-part{
