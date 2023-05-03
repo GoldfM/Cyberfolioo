@@ -1,6 +1,6 @@
 import random
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import PermissionDenied
@@ -248,7 +248,8 @@ class ProfileUpdateView(UpdateView):
 
         return  super().post(request, args, kwargs)
 
-
-
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
