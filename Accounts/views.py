@@ -255,12 +255,13 @@ def logout_view(request):
 class DeleteProject(View):
     def post(self, request):
         project_id = request.POST.get('project_id')
-        redirect_url = request.POST.get('redirect_url')
+        user_id = request.POST.get('user_id')
+        new_user = User.objects.get(id=user_id)
 
         if Project.objects.filter(id=project_id).exists():
-            Project.objects.filter(id=project_id).delete()
+            Project.objects.get(id=project_id).delete()
 
-        return redirect(redirect_url)
+        return redirect(reverse_lazy('profile', kwargs={'slug': request.user.slug}))
 
 
 class RateProject(View):

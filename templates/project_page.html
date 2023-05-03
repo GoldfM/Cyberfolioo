@@ -138,13 +138,20 @@
                         </div>
                     </div>
                 </div>
+                {% if request.user in proj.get_users %}
                 <div class="about-project_edit">
                     <div>
                         <img class="about-project_img" src="{% static 'images/pen.png' %}">
                     </div>
                     <div>Редактировать</div>
-                    <a class="basket-icon"><img src="{% static 'images/basket.png' %}"></a>
+                    <form action="{% url 'deleteProject' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="project_id" value="{{ proj.id }}">
+                        <input type="hidden" name="user_id" value="{{ request.user.id }}">
+                        <button type="submit" class="basket-icon"><img src="{% static 'images/basket.png' %}"></button>
+                    </form>
                 </div>
+                {% endif %}
             </div>
         </div>
         {% if request.user not in proj.get_users and request.user.id not in proj.get_users_who_rated %}
