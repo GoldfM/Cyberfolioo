@@ -200,6 +200,11 @@ p{
     width: 2.03vw;
 }
 
+.basket-icon{
+    width: 2.76vw;
+    margin-left: 19.32vw;
+}
+
 .review{
     display: flex;
     margin: auto;
