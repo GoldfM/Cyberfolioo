@@ -266,14 +266,13 @@ class DeleteProject(View):
 class RateProject(View):
     def post(self, request):
         project_id = request.POST.get('project_id')
+        user_id = request.POST.get('user_id')
         redirect_url = request.POST.get('redirect_url')
         score = request.POST.get('score')
         project = Project.objects.get(id=project_id)
 
         if request.user.is_authenticated:
-            project.count_registred += 1
-            project.sum_registred += int(score)
-            project.save()
+            Rate.objects.create(user_id=user_id, project_id=project_id, rate=score)
 
         else:
             project.count_unregistred += 1
