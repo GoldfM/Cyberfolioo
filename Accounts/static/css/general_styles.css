@@ -82,6 +82,10 @@ html {
   padding: 0px;
 }
 
+.exit-icon{
+    width: 2.29vw;
+}
+
 .abour-project {
   font-weight: 400;
   font-size: 1.46vw;
