@@ -39,7 +39,8 @@ class User(AbstractUser):
 
 
     def get_projects(self):
-        return Project.objects.all().filter(user_id=self.id)
+        return Project.objects.all().filter(users=self)
+
     def count_projects(self):
         return self.get_projects().count()
 
@@ -72,11 +73,11 @@ def project_directory_path(instance, filename):
 class Project(models.Model):
     slug = models.SlugField(verbose_name='Слаг', unique=False)
     name = models.CharField(max_length=50, db_index=True, verbose_name="Название")
-    user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name="Автор проекта")
+    users = models.ManyToManyField(User)
     type = models.ForeignKey('TypeProject', on_delete=models.PROTECT, verbose_name='Тип преокта', default=1)
     spec_proj = models.ForeignKey('SpecProject', on_delete=models.PROTECT, verbose_name='Специализация', default=1)
-    sum_registred = models.IntegerField(default=0, verbose_name='Сумма оценок зареганных')
-    count_registred = models.IntegerField(default=0, verbose_name='Количество оценок зареганных')
+    #sum_registred = models.IntegerField(default=0, verbose_name='Сумма оценок зареганных')
+    #count_registred = models.IntegerField(default=0, verbose_name='Количество оценок зареганных')
     sum_unregistred = models.IntegerField(default=0, verbose_name='Сумма оценок незареганных')
     count_unregistred = models.IntegerField(default=0, verbose_name='Количество оценок незареганных')
     descriptions = models.TextField(max_length=300, verbose_name='Описание')
@@ -115,9 +116,13 @@ class Project(models.Model):
         return Project.objects.get(slug=self.slug).users.all()
 
     def get_rate_registred(self):
-        if self.count_registred:
-            return round(self.sum_registred / self.count_registred, 1)
+        if Rate.objects.filter(project=self).count() > 0:
+            rates = Rate.objects.filter(project=self).values_list('rate', flat=True)
+            return round(sum(rates) / rates.count(), 1)
         return 0
+
+    def get_users_who_rated(self):
+        return Rate.objects.filter(project=self).values_list('user', flat=True)
 
     def get_rate_unregistred(self):
         if self.count_unregistred:
@@ -179,6 +184,15 @@ class Follow(models.Model):
     class Meta:
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'
+        ordering = ['id']
+
+class Rate(models.Model):
+    user = models.ForeignKey('User', related_name='user', on_delete=models.CASCADE, verbose_name='Кто оценил')
+    project = models.ForeignKey('Project', related_name='project',on_delete=models.CASCADE, verbose_name='Какой проект оценил')
+    rate = models.IntegerField(default=0, verbose_name='оценка')
+    class Meta:
+        verbose_name = 'Оценка'
+        verbose_name_plural = 'Оценки'
         ordering = ['id']
 
 
