@@ -199,7 +199,7 @@
                 <input type="hidden" name="user_id" value="{{ request.user.id }}">
                 <input type="hidden" name="project_id" value="{{ proj.id }}">
                 <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                <button onclick="setValue();" type="submit" class="review_button">Оставить отзыв</button>
+                <button onclick="setValue();" type="submit" class="review_button">Поставить оценку</button>
                 <script>
                     function setValue() {
                       var form = document.getElementById("formforkatya");

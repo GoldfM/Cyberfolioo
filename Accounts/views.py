@@ -28,8 +28,12 @@ class MySubscribtions(ListView):
         follow_to = Follow.objects.filter(follow_from=cur_user)
         pks = follow_to.values_list('follow_to', flat=True)
         print(pks)
-
         return User.objects.filter(pk__in = pks)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Мои подписки"
+        return context
 
 
 class ProjectView(DetailView):
@@ -78,6 +82,11 @@ class addProject(CreateView):
         form.instance.user = self.request.user
         return super(addProject, self).form_valid(form)
 
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Добавление проекта"
+        return context
+
 
 def wtfForm1(request, name,surname, sursurname):
     if request.method == 'POST':
@@ -106,9 +115,9 @@ class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'enter-page.html'
 
-    def get_context_data(self, *, object_list = None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        #c_def = self.get_user_context(title="Авторизация")
+        context['title'] = "Авторизация"
         return context
 
     def get_success_url(self):
@@ -247,6 +256,11 @@ class ProfileUpdateView(UpdateView):
 
 
         return  super().post(request, args, kwargs)
+
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Редактирование профиля"
+        return context
 
 def logout_view(request):
     logout(request)
