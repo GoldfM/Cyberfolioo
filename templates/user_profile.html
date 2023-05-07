@@ -87,7 +87,8 @@
                 {% if user.photo %}
                     <img src="{{user.photo.url}}" alt="" class="avatar">
                 {% else %}
-                    <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
+                    <img src="{% static '/images/default_avatar.png' %}" alt="" class="avatar">
+
                 {% endif %}
                 {% if is_your_profile %}
                 <a href="{% url 'editProfile' slug=request.user.slug %}" class="redactor-link">
@@ -113,7 +114,7 @@
                 {% if project.avatar_image %}
                     <img src="{{ project.avatar_image.url }}" alt="" class="avatar">
                 {% else %}
-                    <img src="{% static '/images/user-image.png' %}" alt="" class="avatar">
+                    <img src="{% static '/images/default_photo.png' %}" alt="" class="avatar">
                 {% endif %}
             </div>
             <div class="project-info-aria">

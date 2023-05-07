@@ -93,7 +93,7 @@ class Project(models.Model):
     main_image = models.ImageField(upload_to=project_directory_path, blank=True, verbose_name="Основное фото")
 
     def teammates(self):
-        return [self.teammate1,self.teammate2,self.teammate3,self.teammate4,self.teammate5]
+        return self.users.all()
     def save(self, *args, **kwargs):
         # Slugify (Cyrillic)
         alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z',

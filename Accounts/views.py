@@ -49,6 +49,9 @@ class ProjectView(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = str(context["proj"].name)
+
+        context["all_profiles"] = User.objects.all()
+
         #c_def = self.get_user_context(title = context["post"])
         return context
 
@@ -74,9 +77,13 @@ class addProject(CreateView):
     model = Project
     enctype = "multipart/form-data"
     template_name = "project_add.html"
-    success_url = reverse_lazy('home')
+    #success_url = reverse_lazy('project')
+    def get_success_url(self):
+         return reverse_lazy('project',
+                     kwargs={'profile_slug': self.request.user.slug,
+                             'post_slug': self.object.slug})
     fields = ['name', 'type', 'key_words' ,'spec_proj', 'descriptions', 'time_developing',
-              'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
+          'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
 
     def form_valid(self, form):
         form.instance.teammate1 = 'http://127.0.0.1:8000' + self.request.user.get_absolute_url()
@@ -239,8 +246,11 @@ class ProjectUpdateView(UpdateView):
     fields = ['name', 'type', 'key_words' ,'spec_proj', 'descriptions', 'time_developing',
               'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
     template_name = 'project_edit.html'
-    success_url = reverse_lazy('home')
 
+    def get_success_url(self):
+         return reverse_lazy('project',
+                     kwargs={'profile_slug': self.request.user.slug,
+                             'post_slug': self.object.slug})
     def get_context_data(self, *, object_list = None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Редактирование профиля"
