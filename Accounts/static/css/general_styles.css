@@ -2,7 +2,52 @@ body {
   background-image: url(../images/background.png);
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
+
+.photos_add a{
+    display: none;
+}
+
+
+
+.photos_add{
+    font-size: 0px;
+}
+
+.photos_add br {
+    display: none;
+}
+
+.input-wrapper br {
+    display: none;
+}
+
+.input-wrapper label:not(:last-child) {
+    display: none;
+}
+
+/*Владимир Абрамов*/
+
+.input-wrapper a{
+    display: none;
+}
+
+.input-wrapper{
+    font-size: 0px;
+}
+
+.input-wrapper input {
+    display: none;
+}
+
+.special-input {
+    height: 3.57vw !important;
+}
+
+
 
 .usual-button {
   background-color: #feb250;
@@ -12,7 +57,25 @@ body {
   font-weight: 400;
   font-size: 2.5vw;
   line-height: 2.7vw;
-  border: 0px !important;
+  border: 0px;
+}
+
+.unsubscribe {
+    border: 0.1vw solid #FEAF4A !important;
+    background-color: #F0EDF8;
+    color: #feb250 !important;
+}
+
+.usual-button:hover {
+    box-shadow: 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25), 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25);
+    transition: 0.3s;
+}
+
+.usual-button:active {
+    box-shadow: 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25), 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25);
+    background-color: #FF9000;
+    border-color: #FF9000;
+    transition: 0.3s;
 }
 
 p {margin: 0;}
@@ -43,6 +106,7 @@ img {
 
 html {
   font-family: "Gordita";
+  height: 100%;
 }
 
 * {
@@ -225,6 +289,9 @@ h2 {
   padding: 1.97vw 7.55vw 1.4vw 4.16vw;
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
+  bottom: 0px;
+  bottom: 0px;
   width: 100%;
   height: 10.9vw;
 }
@@ -289,8 +356,7 @@ h2 {
 }
 
 .submit-button{
-  height: 3.85vw;
-  padding: 0.72vw 1.71vw;
+
 }
 
 .textarea{
@@ -315,7 +381,3 @@ h2 {
   color: #f8f6f8 !important;
 }
 
-.unsubscribe{
-  background-color: #f8f6f8;
-  color: #feb250 !important;
-}

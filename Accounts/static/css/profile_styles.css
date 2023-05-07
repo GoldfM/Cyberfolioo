@@ -120,6 +120,10 @@ body {
   display: flex;
 }
 
+.secon-input:not(:last-child) {
+    margin-bottom: 0.26vw;
+}
+
 .secon-input {
   font-size: 1.4583vw;
   line-height: 1.5625vw;
