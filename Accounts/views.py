@@ -230,7 +230,21 @@ class Profile(DetailView):
         #context = super().get_context_data(**kwargs)
         #context['title'] = "Профиль"
         #return context
+class ProjectUpdateView(UpdateView):
+    model = Project
+    enctype = "multipart/form-data"
+    fields = ['name', 'type', 'key_words' ,'spec_proj', 'descriptions', 'time_developing',
+              'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
+    template_name = 'project_edit.html'
+    success_url = reverse_lazy('home')
 
+    def get_context_data(self, *, object_list = None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Редактирование профиля"
+        return context
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        return super(ProjectUpdateView, self).post(request,*args, **kwargs)
 class ProfileUpdateView(UpdateView):
     model = User
     enctype = "multipart/form-data"
