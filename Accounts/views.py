@@ -84,7 +84,10 @@ class addProject(CreateView):
 
         for teammate in [form.instance.teammate2,form.instance.teammate3,form.instance.teammate4,form.instance.teammate5]:
             if teammate:
-                print(str(teammate))
+                if str(teammate).startswith('http://127.0.0.1:8000/profile/'):
+                    print(str(teammate))
+                else:
+                    return redirect('addProject')
 
         return super(addProject, self).form_valid(form)
 
