@@ -79,7 +79,13 @@ class addProject(CreateView):
               'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.teammate1 = 'http://127.0.0.1:8000' + self.request.user.get_absolute_url()
+        print('http://127.0.0.1:8000' + self.request.user.get_absolute_url())
+
+        for teammate in [form.instance.teammate2,form.instance.teammate3,form.instance.teammate4,form.instance.teammate5]:
+            if teammate:
+                print(str(teammate))
+
         return super(addProject, self).form_valid(form)
 
     def get_context_data(self, *, object_list = None, **kwargs):

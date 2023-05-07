@@ -48,7 +48,9 @@
                     <h2 class="settings_title">Участники</h2>
                     <p class='people_text'>Здесь вы можете указать людей, которые вам помогали в разработке проекта, либо были как-либо затронуты
                         (ссылкой на их профиль, либо просто ФИО)</p>
-                    {% render_field form.teammate1 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% if bad_teammate_url %}
+                        <label for="">Вставьте ссылку на акаунт Cyberfolio</label>
+                    {% endif %}
                     {% render_field form.teammate2 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
                     {% render_field form.teammate3 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
                     {% render_field form.teammate4 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}

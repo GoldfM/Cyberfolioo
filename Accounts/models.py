@@ -68,7 +68,7 @@ class User(AbstractUser):
         ordering = ['id']
 
 def project_directory_path(instance, filename):
-    return 'accounts/{0}/projects/{1}/{2}'.format(instance.user.slug, instance.name, filename)
+    return 'projects/{0}/{1}'.format( instance.name, filename)
 
 class Project(models.Model):
     slug = models.SlugField(verbose_name='Слаг', unique=False)
@@ -102,8 +102,14 @@ class Project(models.Model):
                     'у': 'u', 'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ы': 'i', 'э': 'e',
                     'ю': 'yu',
                     'я': 'ya'}
-
         self.slug = slugify(''.join(alphabet.get(w, w) for w in self.name.lower()))
+
+        super(Project, self).save(*args, **kwargs)
+
+        for teammate in [self.teammate1,self.teammate2,self.teammate3,self.teammate4,self.teammate5]:
+            if teammate:
+                self.users.add(User.objects.get(slug = teammate.split('/')[-1]) )
+
         super(Project, self).save(*args, **kwargs)
 
     def __str__(self):
