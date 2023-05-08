@@ -7,8 +7,18 @@ body {
   min-height: 100%;
 }
 
+.underlined_link:hover {
+    border-bottom: 0.2vw solid #FF9000;
+
+}
+
+.basket-icon:hover {
+    transform: rotate(360deg);
+    transition: 0.4s;
+}
+
 .photos_add a{
-    display: none;
+    display:none;
 }
 
 .photos_add input {
@@ -75,8 +85,13 @@ body {
     color: #feb250 !important;
 }
 
+.redactor-icon:hover {
+    transform: rotate(360deg);
+    transition: 0.5s;
+}
+
 .usual-button:hover {
-    box-shadow: 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25), 0px 0.2vw 0.2vw rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25), 0px 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
     transition: 0.3s;
 }
 
@@ -166,6 +181,15 @@ html {
   font-size: 1.46vw;
   line-height: 1.5625vw;
   color: #FF9000;
+}
+
+.project-link {
+    padding: 1vw;
+}
+
+
+.abour-project:hover {
+  border-bottom: 0.2vw solid #FF9000;
 }
 
 .abour-project-icon {

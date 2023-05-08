@@ -22,15 +22,15 @@
                     <div class="input-wrapper">
                     {% csrf_token %}
 
-                       {% render_field form.photo value="Добавить фото" accept="image/*,image/jpeg" id="input_file" class="input_file" %}
+                       {% render_field form.photo value="Добавить фото" accept="image/*,image/jpeg" id="input_file" class="input_file underlined_link" %}
 
                         <img src="{% static '/images/photo-icon.svg' %}" alt="" class="add-photo-icon">
-                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_file" class="input_file">
-                        <label for="input_file" class="input-photo-label">Добавить фото</label>
+                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_file" class="input_file underlined_link">
+                        <label for="input_file" class="input-photo-label underlined_link">Добавить фото</label>
                     </div>
                     <div class="submit-section photo-submit-section">
                         <img src="{% static '/images/galochka.svg' %}" alt="" class="galochka-icon">
-                        <input type="submit" value="Сохранить" class="save-button">
+                        <input type="submit" value="Сохранить" class="save-button underlined_link">
                     </div>
                 </form>
             </div>
@@ -68,7 +68,7 @@
 
                     <div class="submit-section info-submit-section">
                         <img src="{% static '/images/galochka.svg' %}" alt="" class="galochka-icon">
-                        <input type="submit" value="Сохранить изменения" class="save-button">
+                        <input type="submit" value="Сохранить изменения" class="save-button underlined_link">
                     </div>
                 </form>
             </div>

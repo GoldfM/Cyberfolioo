@@ -108,7 +108,7 @@
                 </div>
                 <div class="link_container">
                     <a href="{{proj.url}}">
-                    <div class="link_container_left-part">
+                    <div class="link_container_left-part underlined_link">
                         Ссылка на скачивание
                     </div>
                     </a>
@@ -143,7 +143,7 @@
                 </div>
                 {% if request.user in proj.get_users %}
                 <div class="about-project_edit">
-                    <a class="edit-project" href="{% url 'editProject' slug=proj.slug%}">
+                    <a class="edit-project underlined_link" href="{% url 'editProject' slug=proj.slug%}">
                     <div>
                         <img class="about-project_img" src="{% static 'images/pen.png' %}">
                     </div>
@@ -204,7 +204,7 @@
                 <input type="hidden" name="user_id" value="{{ request.user.id }}">
                 <input type="hidden" name="project_id" value="{{ proj.id }}">
                 <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}">
-                <button onclick="setValue();" type="submit" class="review_button">Поставить оценку</button>
+                <button onclick="setValue();" type="submit" class="review_button underlined_link">Поставить оценку</button>
                 <script>
                     function setValue() {
                       var form = document.getElementById("formforkatya");

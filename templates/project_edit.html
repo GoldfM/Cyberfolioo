@@ -36,9 +36,9 @@
 {#                </form> #}
             </div>
             <div class="check_container">
-                <img class="check_img" src="{% static '/images/check.png' %}">
-                <input type="submit" value="Сохранить изменения" class="check">
-{#                <span class="check">Сохранить изменения</span>#}
+                <!--<img class="check_img" src="{% static '/images/check.png' %}">--!>
+                <input type="submit" value="Сохранить изменения" class="check usual-button">
+{#                <span class="check usual-button">Сохранить изменения</span>#}
             </div>
         </div>
 
@@ -97,14 +97,14 @@
                         <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
                         {% render_field form.avatar_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}
                         <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar" class="input_file" >
-                        <label for="input_avatar" class="photos_add-text">Добавить фото</label>
+                        <label for="input_avatar" class="photos_add-text underlined_link">Добавить аватар проекта</label>
 
                     </div>
                     <div class="photos_add">
                         <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
                         {% render_field form.main_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}
                         <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar2" class="input_file" >
-                        <label for="input_avatar2" class="photos_add-text">Добавить фото</label>
+                        <label for="input_avatar2" class="photos_add-text underlined_link">Добавить основное фото</label>
                     </div>
                 </div>
             </div>
