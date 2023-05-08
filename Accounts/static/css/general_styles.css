@@ -238,6 +238,11 @@ h2 {
   cursor: pointer;
 }
 
+.nav-link:hover {
+    border-bottom: 1vw !important;
+    border-color: #f3f0f8 !important;
+}
+
 .nav-item:not(:last-child) {
   margin-right: 6.4vw;
 }
