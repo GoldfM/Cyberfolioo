@@ -11,6 +11,15 @@ body {
     display: none;
 }
 
+.photos_add input {
+    display: none;
+}
+
+.input-wrapper {
+  margin-top: 2.86458vw;
+  display: flex;
+  align-items: center;
+}
 
 
 .photos_add{
@@ -238,9 +247,19 @@ h2 {
   cursor: pointer;
 }
 
+.profile-link {
+    padding-top:0.3vw;
+    padding-bottom:0.3vw;
+}
+
+.profile-link:hover {
+    border-bottom: 0.3vw solid #FF9000 !important;
+    border-color: #FF9000 !important;
+}
+
 .nav-link:hover {
-    border-bottom: 1vw !important;
-    border-color: #f3f0f8 !important;
+    border-bottom: 0.3vw solid #FF9000 !important;
+    border-color: #FF9000 !important;
 }
 
 .nav-item:not(:last-child) {
