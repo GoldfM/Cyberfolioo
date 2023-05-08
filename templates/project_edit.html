@@ -95,14 +95,16 @@
                 <div class="addition">
                     <div class="photos_add">
                         <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
-{#                        <span class="photos_add-text">Добавить аватарку проекта</span>#}
-                        {% render_field form.avatar_image%}
+                        {% render_field form.avatar_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}
+                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar" class="input_file" >
+                        <label for="input_avatar" class="photos_add-text">Добавить фото</label>
 
                     </div>
                     <div class="photos_add">
                         <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
-{#                        <span class="photos_add-text">Добавить основное фото</span>#}
-                        {% render_field form.main_image%}
+                        {% render_field form.main_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}
+                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar2" class="input_file" >
+                        <label for="input_avatar2" class="photos_add-text">Добавить фото</label>
                     </div>
                 </div>
             </div>
