@@ -93,6 +93,9 @@
             <div class="hero_img">
                 {% if proj.avatar_image %}
                     <img class="hero_pic" src="{{proj.avatar_image.url}}">
+                    {% else %}
+                    <img class="hero_pic" src="{% static 'images/default_photo.png' %}">
+
                 {% endif %}
             </div>
         </div>
@@ -104,12 +107,12 @@
                     <p class="description_text">{{proj.descriptions}}</p>
                 </div>
                 <div class="link_container">
+                    <a href="{{proj.url}}">
                     <div class="link_container_left-part">
                         Ссылка на скачивание
                     </div>
-                    <div class="link_container_right-part">
-                        <a class="description_link" href="{{proj.url}}">{{proj.url}}</a>
-                    </div>
+                    </a>
+
                 </div>
             </div>
             <div class="about-project">
@@ -132,7 +135,7 @@
                         <div class="about-project_category_description">
                         {% for teammate in proj.teammates %}
                             {% if teammate %}
-                                <a href="{{ teammate }}" class="about-project_category_description_user" >{{teammate}}</a>
+                                <a href="{% url 'profile' teammate %}" class="about-project_category_description_user" ><p>{{ teammate.get_short_name }}</p></a>
                             {% endif %}
                         {% endfor %}
                         </div>
