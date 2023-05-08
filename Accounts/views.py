@@ -244,7 +244,7 @@ class ProjectUpdateView(UpdateView):
     model = Project
     enctype = "multipart/form-data"
     fields = ['name', 'type', 'key_words' ,'spec_proj', 'descriptions', 'time_developing',
-              'teammate1', 'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
+              'teammate2', 'teammate3', 'teammate4', 'teammate5', 'url', 'avatar_image', 'main_image']
     template_name = 'project_edit.html'
 
     def get_success_url(self):
@@ -263,6 +263,8 @@ class ProfileUpdateView(UpdateView):
     enctype = "multipart/form-data"
     fields = ['first_name', 'last_name', 'sur_sur_name', 'spec', 'vk_url', 'hh_url', 'behance_url', 'descriptions', 'photo']
     template_name = 'profile_settings1.html'
+    def get_success_url(self):
+        return reverse_lazy('editProfile',kwargs = {'slug': self.request.user.slug})
     def get(self, request, *args, **kwargs):
         slug = self.kwargs.get(self.slug_url_kwarg, None)
         user_profile = get_object_or_404(User, slug=slug)

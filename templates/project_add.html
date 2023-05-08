@@ -84,12 +84,16 @@
                 <div class="photos_text"><span class="photos_main-word">Основное фото</span> - будет использоваться как задний фон на аватарке и главное фото, в панеле отзывов. Поэтому оно должно быть информативным </div>
                 <div class="photos_img">
                     <div>
-                        <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">
+                        {% if project.avatar_image %}
+                        <img class="photos_img_item" src="{{ project.avatar_image.url }}">
+                        {% else %}
+                        <img class="photos_img_item" src="{% static '/images/default_avatar.png'%}">
+                        {% endif %}
                     </div>
-                    <br>
-                    <div>
-                        <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">
-                    </div>
+{#                    <br>#}
+{#                    <div>#}
+{#                        <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">#}
+{#                    </div>#}
                     
                 </div>
                 <div class="addition">
@@ -100,12 +104,12 @@
                         <label for="input_avatar" class="photos_add-text underlined_link">Добавить аватар проекта</label>
 
                     </div>
-                    <div class="photos_add">
-                        <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
-                        {% render_field form.main_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}
-                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar2" class="input_file" >
-                        <label for="input_avatar2" class="photos_add-text underlined_link">Добавить основное фото</label>
-                    </div>
+{#                    <div class="photos_add">#}
+{#                        <img class="photo_add_icon" src="{% static '/images/photo.png'%}">#}
+{#                        {% render_field form.main_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}#}
+{#                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar2" class="input_file" >#}
+{#                        <label for="input_avatar2" class="photos_add-text underlined_link">Добавить основное фото</label>#}
+{#                    </div>#}
                 </div>
             </div>
 

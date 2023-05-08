@@ -51,10 +51,30 @@
                     {% if bad_teammate_url %}
                         <label for="">Вставьте ссылку на акаунт Cyberfolio</label>
                     {% endif %}
-                    {% render_field form.teammate2 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
-                    {% render_field form.teammate3 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
-                    {% render_field form.teammate4 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
-                    {% render_field form.teammate5 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% if project.teammate2 %}
+                        {% render_field form.teammate2 type="text" style="display:" placeholder="Ссылка на профиль" class="input main_input "%}
+                    {% else %}
+                        {% render_field form.teammate2 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% endif %}
+
+                    {% if project.teammate3 %}
+                        {% render_field form.teammate3 type="text" style="display:" placeholder="Ссылка на профиль" class="input main_input "%}
+                    {% else %}
+                        {% render_field form.teammate3 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% endif %}
+
+                    {% if project.teammate4 %}
+                        {% render_field form.teammate4 type="text" style="display:" placeholder="Ссылка на профиль" class="input main_input "%}
+                    {% else %}
+                        {% render_field form.teammate4 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% endif %}
+
+                    {% if project.teammate5 %}
+                        {% render_field form.teammate5 type="text" style="display:" placeholder="Ссылка на профиль" class="input main_input "%}
+                    {% else %}
+                        {% render_field form.teammate5 type="text" style="display: none" placeholder="Ссылка на профиль" class="input main_input profile_input"%}
+                    {% endif %}
+
                     <div class="people_add_button">
                         <img class="user_img" src="{% static '/images/user.png' %}">
                         <button type="button" class="people_add">+Добавить участника</button>
@@ -81,15 +101,19 @@
                 <h2 class="settings_title photos_title">Фотографии</h2>
                 <div class="photos_text">Чтобы другие пользователи могли лучше понять, как работает ваш проект, как он выглядит - рекомендуем добавить фотографии</div>
                 <div class="photos_text"><span class="photos_main-word">Аватарка проекта</span> - то, что пользователь увидит сначала, когда откроет проект. Это должно быть что-то заметное, цепляющее </div>
-                <div class="photos_text"><span class="photos_main-word">Основное фото</span> - будет использоваться как задний фон на аватарке и главное фото, в панеле отзывов. Поэтому оно должно быть информативным </div>
+{#                <div class="photos_text"><span class="photos_main-word">Основное фото</span> - будет использоваться как задний фон на аватарке и главное фото, в панеле отзывов. Поэтому оно должно быть информативным </div>#}
                 <div class="photos_img">
                     <div>
-                        <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">
+                        {% if project.avatar_image %}
+                            <img class="photos_img_item" src="{{ project.avatar_image.url}}">
+                        {% else %}
+                            <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">
+                        {% endif %}
                     </div>
-                    <br>
-                    <div>
-                        <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">
-                    </div>
+{#                    <br>#}
+{#                    <div>#}
+{#                        <img class="photos_img_item" src="{% static '/images/project_settings_2.png'%}">#}
+{#                    </div>#}
                     
                 </div>
                 <div class="addition">
@@ -100,12 +124,12 @@
                         <label for="input_avatar" class="photos_add-text underlined_link">Добавить аватар проекта</label>
 
                     </div>
-                    <div class="photos_add">
-                        <img class="photo_add_icon" src="{% static '/images/photo.png'%}">
-                        {% render_field form.main_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}
-                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar2" class="input_file" >
-                        <label for="input_avatar2" class="photos_add-text underlined_link">Добавить основное фото</label>
-                    </div>
+{#                    <div class="photos_add">#}
+{#                        <img class="photo_add_icon" src="{% static '/images/photo.png'%}">#}
+{#                        {% render_field form.main_image value="Добавить фото" accept="image/*,image/jpeg" id="input_avatar" class="input_file" %}#}
+{#                        <input type="file" name="user-photo" value="Добавить фото" multiple accept="image/*,image/jpeg,png" id="input_avatar2" class="input_file" >#}
+{#                        <label for="input_avatar2" class="photos_add-text underlined_link">Добавить основное фото</label>#}
+{#                    </div>#}
                 </div>
             </div>
 

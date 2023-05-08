@@ -105,6 +105,7 @@ class Project(models.Model):
         self.slug = slugify(''.join(alphabet.get(w, w) for w in self.name.lower()))
 
         super(Project, self).save(*args, **kwargs)
+        self.users.clear()
 
         for teammate in [self.teammate1,self.teammate2,self.teammate3,self.teammate4,self.teammate5]:
             if teammate:
