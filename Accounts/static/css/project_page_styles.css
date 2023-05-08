@@ -34,6 +34,17 @@ p{
     border-radius: 1.09vw;
 }
 
+.edit-project{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.edit-text {
+    color: #FF9000;
+    margin-left:0.52vw;
+}
+
 .hero-description{
     font-family: 'Gordita';
     font-style: normal;

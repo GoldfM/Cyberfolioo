@@ -143,15 +143,12 @@
                 </div>
                 {% if request.user in proj.get_users %}
                 <div class="about-project_edit">
-                    <div class="edit-button">
-                        <a class="about-project_img" href="{% url 'editProject' slug=proj.slug%}">
-                            <div>
-                                <img  src="{% static 'images/pen.png' %}">
-                            </div>
-                        </a>
-                        <div>Редактировать</div>
+                    <a class="edit-project" href="{% url 'editProject' slug=proj.slug%}">
+                    <div>
+                        <img class="about-project_img" src="{% static 'images/pen.png' %}">
                     </div>
-
+                    <div class="edit-text">Редактировать</div>
+                    </a>
                     <form action="{% url 'deleteProject' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="project_id" value="{{ proj.id }}">
