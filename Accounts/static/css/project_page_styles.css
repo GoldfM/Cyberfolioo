@@ -63,6 +63,7 @@ p{
 
 .hero_title{
     margin-bottom: 3.64vw;
+    overflow-wrap: break-word;
 }
 
 .hero-review_title{
@@ -183,6 +184,7 @@ p{
     line-height: 1.82vw;
     color: #000000;
     width: 18.8vw;
+    overflow-wrap: break-word;
 }
 
 .about-project_category_description_user{
@@ -194,6 +196,20 @@ p{
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 3.125vw;
+}
+
+.edit-button{
+    display: flex;
+    align-items: center;
+}
+
+.basket-icon{
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .about-project_edit{
@@ -266,7 +282,7 @@ p{
 
 .review_textarea{
     width: 41.4vw;
-    height: 6.77vw;
+    height: 6.77vw; /*проверь*/
 }
 
 .star_img{
