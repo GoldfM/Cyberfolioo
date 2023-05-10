@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-apw^@^u_ek968191$58ecwx#wm^$)1%ej+mmdfd&w#(5m9r84+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 MEDIA_URL = '/media/'
